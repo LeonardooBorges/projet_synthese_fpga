@@ -1,0 +1,98 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim
+Ealu
+Z1 w1525698111
+Z2 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z3 DPx8 cyclonev 18 cyclonev_atom_pack 0 22 41KVoNENnj;RUmMIITVQg1
+Z4 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z5 DPx8 cyclonev 19 cyclonev_components 0 22 MmMkVfW5JWkR?lm<VcfRO1
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z8 DPx12 altera_lnsim 23 altera_lnsim_components 0 22 3L]34bNSPL@[RD2AeKH]S3
+R0
+Z9 8microprocessor.vho
+Z10 Fmicroprocessor.vho
+l0
+L37
+V1g_2a4B[LX1PRkd9QSf1]2
+!s100 Z7[E9NA]]Tgg>o]?8mi;<2
+Z11 OV;C;10.5b;63
+32
+Z12 !s110 1525698112
+!i10b 1
+Z13 !s108 1525698112.000000
+Z14 !s90 -work|work|microprocessor.vho|
+Z15 !s107 microprocessor.vho|
+!i113 1
+Z16 o-work work
+Z17 tExplicit 1 CvgOpt 0
+Astructure
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+DEx4 work 3 alu 0 22 1g_2a4B[LX1PRkd9QSf1]2
+l451
+L47
+VFR`6hQS86]_FHzlIc>KgV3
+!s100 [hFzk<Ll42aj1jWEUYTcM1
+R11
+32
+R12
+!i10b 1
+R13
+R14
+R15
+!i113 1
+R16
+R17
+Ealu_vhd_vec_tst
+Z18 w1525698107
+R6
+R7
+R0
+Z19 8Waveform.vwf.vht
+Z20 FWaveform.vwf.vht
+l0
+L32
+Vhe@VmQBfo15M7z`66zg402
+!s100 9N9=bCocO2Kl?YK8nKJ8z2
+R11
+32
+Z21 !s110 1525698113
+!i10b 1
+R13
+Z22 !s90 -work|work|Waveform.vwf.vht|
+Z23 !s107 Waveform.vwf.vht|
+!i113 1
+R16
+R17
+Aalu_arch
+R6
+R7
+Z24 DEx4 work 15 alu_vhd_vec_tst 0 22 he@VmQBfo15M7z`66zg402
+l51
+L34
+V2zBYXQZ][abU^a8O1^[i51
+!s100 jBm2@?Njm_R3@RjB3iOJn3
+R11
+32
+R21
+!i10b 1
+R13
+R22
+R23
+!i113 1
+R16
+R17
