@@ -19,7 +19,7 @@
 -- the top level entity of the current Quartus project .The user can use this   
 -- testbench to simulate his design using a third-party simulation tool .       
 -- *****************************************************************************
--- Generated on "05/07/2018 10:01:47"
+-- Generated on "05/08/2018 16:14:54"
                                                              
 -- Vhdl Test Bench(with test vectors) for design  :          ALU
 -- 
@@ -320,9 +320,9 @@ END PROCESS t_prcs_A_7;
 t_prcs_A_6: PROCESS
 BEGIN
 	A(6) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	A(6) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	A(6) <= '0';
 	WAIT FOR 570000 ps;
 	A(6) <= '1';
@@ -336,9 +336,9 @@ END PROCESS t_prcs_A_6;
 t_prcs_A_5: PROCESS
 BEGIN
 	A(5) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	A(5) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	A(5) <= '0';
 	WAIT FOR 430000 ps;
 	A(5) <= '1';
@@ -396,9 +396,9 @@ END PROCESS t_prcs_A_0;
 t_prcs_B_31: PROCESS
 BEGIN
 	B(31) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(31) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(31) <= '0';
 	WAIT FOR 30000 ps;
 	B(31) <= '1';
@@ -420,9 +420,9 @@ END PROCESS t_prcs_B_31;
 t_prcs_B_30: PROCESS
 BEGIN
 	B(30) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(30) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(30) <= '0';
 	WAIT FOR 30000 ps;
 	B(30) <= '1';
@@ -444,9 +444,9 @@ END PROCESS t_prcs_B_30;
 t_prcs_B_29: PROCESS
 BEGIN
 	B(29) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(29) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(29) <= '0';
 	WAIT FOR 30000 ps;
 	B(29) <= '1';
@@ -468,9 +468,9 @@ END PROCESS t_prcs_B_29;
 t_prcs_B_28: PROCESS
 BEGIN
 	B(28) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(28) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(28) <= '0';
 	WAIT FOR 30000 ps;
 	B(28) <= '1';
@@ -492,9 +492,9 @@ END PROCESS t_prcs_B_28;
 t_prcs_B_27: PROCESS
 BEGIN
 	B(27) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(27) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(27) <= '0';
 	WAIT FOR 30000 ps;
 	B(27) <= '1';
@@ -516,9 +516,9 @@ END PROCESS t_prcs_B_27;
 t_prcs_B_26: PROCESS
 BEGIN
 	B(26) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(26) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(26) <= '0';
 	WAIT FOR 30000 ps;
 	B(26) <= '1';
@@ -540,9 +540,9 @@ END PROCESS t_prcs_B_26;
 t_prcs_B_25: PROCESS
 BEGIN
 	B(25) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(25) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(25) <= '0';
 	WAIT FOR 30000 ps;
 	B(25) <= '1';
@@ -564,9 +564,9 @@ END PROCESS t_prcs_B_25;
 t_prcs_B_24: PROCESS
 BEGIN
 	B(24) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(24) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(24) <= '0';
 	WAIT FOR 30000 ps;
 	B(24) <= '1';
@@ -588,9 +588,9 @@ END PROCESS t_prcs_B_24;
 t_prcs_B_23: PROCESS
 BEGIN
 	B(23) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(23) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(23) <= '0';
 	WAIT FOR 30000 ps;
 	B(23) <= '1';
@@ -612,9 +612,9 @@ END PROCESS t_prcs_B_23;
 t_prcs_B_22: PROCESS
 BEGIN
 	B(22) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(22) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(22) <= '0';
 	WAIT FOR 30000 ps;
 	B(22) <= '1';
@@ -636,9 +636,9 @@ END PROCESS t_prcs_B_22;
 t_prcs_B_21: PROCESS
 BEGIN
 	B(21) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(21) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(21) <= '0';
 	WAIT FOR 30000 ps;
 	B(21) <= '1';
@@ -660,9 +660,9 @@ END PROCESS t_prcs_B_21;
 t_prcs_B_20: PROCESS
 BEGIN
 	B(20) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(20) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(20) <= '0';
 	WAIT FOR 30000 ps;
 	B(20) <= '1';
@@ -684,9 +684,9 @@ END PROCESS t_prcs_B_20;
 t_prcs_B_19: PROCESS
 BEGIN
 	B(19) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(19) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(19) <= '0';
 	WAIT FOR 30000 ps;
 	B(19) <= '1';
@@ -708,9 +708,9 @@ END PROCESS t_prcs_B_19;
 t_prcs_B_18: PROCESS
 BEGIN
 	B(18) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(18) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(18) <= '0';
 	WAIT FOR 30000 ps;
 	B(18) <= '1';
@@ -732,9 +732,9 @@ END PROCESS t_prcs_B_18;
 t_prcs_B_17: PROCESS
 BEGIN
 	B(17) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(17) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(17) <= '0';
 	WAIT FOR 30000 ps;
 	B(17) <= '1';
@@ -756,9 +756,9 @@ END PROCESS t_prcs_B_17;
 t_prcs_B_16: PROCESS
 BEGIN
 	B(16) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(16) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(16) <= '0';
 	WAIT FOR 30000 ps;
 	B(16) <= '1';
@@ -780,9 +780,9 @@ END PROCESS t_prcs_B_16;
 t_prcs_B_15: PROCESS
 BEGIN
 	B(15) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(15) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(15) <= '0';
 	WAIT FOR 30000 ps;
 	B(15) <= '1';
@@ -804,9 +804,9 @@ END PROCESS t_prcs_B_15;
 t_prcs_B_14: PROCESS
 BEGIN
 	B(14) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(14) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(14) <= '0';
 	WAIT FOR 30000 ps;
 	B(14) <= '1';
@@ -828,9 +828,9 @@ END PROCESS t_prcs_B_14;
 t_prcs_B_13: PROCESS
 BEGIN
 	B(13) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(13) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(13) <= '0';
 	WAIT FOR 30000 ps;
 	B(13) <= '1';
@@ -852,9 +852,9 @@ END PROCESS t_prcs_B_13;
 t_prcs_B_12: PROCESS
 BEGIN
 	B(12) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(12) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(12) <= '0';
 	WAIT FOR 30000 ps;
 	B(12) <= '1';
@@ -880,9 +880,9 @@ END PROCESS t_prcs_B_12;
 t_prcs_B_11: PROCESS
 BEGIN
 	B(11) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(11) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(11) <= '0';
 	WAIT FOR 30000 ps;
 	B(11) <= '1';
@@ -908,9 +908,9 @@ END PROCESS t_prcs_B_11;
 t_prcs_B_10: PROCESS
 BEGIN
 	B(10) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(10) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(10) <= '0';
 	WAIT FOR 30000 ps;
 	B(10) <= '1';
@@ -932,9 +932,9 @@ END PROCESS t_prcs_B_10;
 t_prcs_B_9: PROCESS
 BEGIN
 	B(9) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(9) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(9) <= '0';
 	WAIT FOR 30000 ps;
 	B(9) <= '1';
@@ -956,9 +956,9 @@ END PROCESS t_prcs_B_9;
 t_prcs_B_8: PROCESS
 BEGIN
 	B(8) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(8) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(8) <= '0';
 	WAIT FOR 30000 ps;
 	B(8) <= '1';
@@ -980,9 +980,9 @@ END PROCESS t_prcs_B_8;
 t_prcs_B_7: PROCESS
 BEGIN
 	B(7) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(7) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(7) <= '0';
 	WAIT FOR 30000 ps;
 	B(7) <= '1';
@@ -1000,9 +1000,9 @@ END PROCESS t_prcs_B_7;
 t_prcs_B_6: PROCESS
 BEGIN
 	B(6) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(6) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(6) <= '0';
 	WAIT FOR 30000 ps;
 	B(6) <= '1';
@@ -1020,9 +1020,9 @@ END PROCESS t_prcs_B_6;
 t_prcs_B_5: PROCESS
 BEGIN
 	B(5) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(5) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(5) <= '0';
 	WAIT FOR 30000 ps;
 	B(5) <= '1';
@@ -1038,9 +1038,9 @@ END PROCESS t_prcs_B_5;
 t_prcs_B_4: PROCESS
 BEGIN
 	B(4) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(4) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(4) <= '0';
 	WAIT FOR 30000 ps;
 	B(4) <= '1';
@@ -1052,9 +1052,9 @@ END PROCESS t_prcs_B_4;
 t_prcs_B_3: PROCESS
 BEGIN
 	B(3) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(3) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(3) <= '0';
 	WAIT FOR 30000 ps;
 	B(3) <= '1';
@@ -1066,9 +1066,9 @@ END PROCESS t_prcs_B_3;
 t_prcs_B_2: PROCESS
 BEGIN
 	B(2) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(2) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(2) <= '0';
 	WAIT FOR 30000 ps;
 	B(2) <= '1';
@@ -1080,9 +1080,9 @@ END PROCESS t_prcs_B_2;
 t_prcs_B_1: PROCESS
 BEGIN
 	B(1) <= '0';
-	WAIT FOR 80000 ps;
+	WAIT FOR 90000 ps;
 	B(1) <= '1';
-	WAIT FOR 110000 ps;
+	WAIT FOR 100000 ps;
 	B(1) <= '0';
 	WAIT FOR 30000 ps;
 	B(1) <= '1';
@@ -1094,33 +1094,36 @@ END PROCESS t_prcs_B_1;
 t_prcs_B_0: PROCESS
 BEGIN
 	B(0) <= '0';
-	WAIT FOR 80000 ps;
-	B(0) <= '1';
-	WAIT FOR 110000 ps;
-	B(0) <= '0';
-	WAIT FOR 30000 ps;
+	WAIT FOR 220000 ps;
 	B(0) <= '1';
 	WAIT FOR 70000 ps;
 	B(0) <= '0';
 WAIT;
 END PROCESS t_prcs_B_0;
+
 -- OP[2]
 t_prcs_OP_2: PROCESS
 BEGIN
 	OP(2) <= '0';
 WAIT;
 END PROCESS t_prcs_OP_2;
+
 -- OP[1]
 t_prcs_OP_1: PROCESS
 BEGIN
 	OP(1) <= '0';
 WAIT;
 END PROCESS t_prcs_OP_1;
+
 -- OP[0]
 t_prcs_OP_0: PROCESS
 BEGIN
 	OP(0) <= '0';
-	WAIT FOR 230000 ps;
+	WAIT FOR 90000 ps;
+	OP(0) <= '1';
+	WAIT FOR 100000 ps;
+	OP(0) <= '0';
+	WAIT FOR 40000 ps;
 	OP(0) <= '1';
 	WAIT FOR 470000 ps;
 	OP(0) <= '0';
