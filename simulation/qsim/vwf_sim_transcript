@@ -7,10 +7,10 @@ Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-A
 
 **** Generating the ModelSim Testbench ****
 
-quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off microprocessor -c microprocessor --vector_source="/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/Waveform.vwf" --testbench_file="/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/Waveform.vwf.vht"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off microprocessor -c microprocessor --vector_source="/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/Waveform2.vwf" --testbench_file="/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/Waveform2.vwf.vht"
 
-Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition    Info: Copyright (C) 2016  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and its AMPP partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel MegaCore Function License Agreement, or other     Info: applicable license agreement, including, without limitation,     Info: that your use is for the sole purpose of programming logic     Info: devices manufactured by Intel and sold by Intel or its     Info: authorized distributors.  Please refer to the applicable     Info: agreement for further details.    Info: Processing started: Mon May  7 10:01:46 2018Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off microprocessor -c microprocessor --vector_source=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/Waveform.vwf --testbench_file=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/Waveform.vwf.vhtInfo (119006): Selected device 5CEBA4F23C7 for design "microprocessor"Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-01005): Ignoring output pin "Y[9]" in vector source file when writing test bench files
+Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition    Info: Copyright (C) 2016  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and its AMPP partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel MegaCore Function License Agreement, or other     Info: applicable license agreement, including, without limitation,     Info: that your use is for the sole purpose of programming logic     Info: devices manufactured by Intel and sold by Intel or its     Info: authorized distributors.  Please refer to the applicable     Info: agreement for further details.    Info: Processing started: Tue May  8 17:08:22 2018Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=vhdl --write_settings_files=off microprocessor -c microprocessor --vector_source=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/Waveform2.vwf --testbench_file=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/Waveform2.vwf.vhtWarning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+ test bench files
 Completed successfully. 
 
 **** Generating the functional simulation netlist ****
@@ -18,7 +18,7 @@ Completed successfully.
 quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory="/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/" microprocessor -c microprocessor
 
 Inconsistency detected by ld.so: dl-close.c: 811: _dl_close: Assertion `map->l_init_called' failed!
-Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition    Info: Copyright (C) 2016  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and its AMPP partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel MegaCore Function License Agreement, or other     Info: applicable license agreement, including, without limitation,     Info: that your use is for the sole purpose of programming logic     Info: devices manufactured by Intel and sold by Intel or its     Info: authorized distributors.  Please refer to the applicable     Info: agreement for further details.    Info: Processing started: Mon May  7 10:01:49 2018Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/ microprocessor -c microprocessorInfo (119006): Selected device 5CEBA4F23C7 for design "microprocessor"Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.Info (204019): Generated file microprocessor.vho in folder "/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim//" for EDA simulation toolInfo: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning    Info: Peak virtual memory: 1114 megabytes    Info: Processing ended: Mon May  7 10:01:51 2018    Info: Elapsed time: 00:00:02    Info: Total CPU time (on all processors): 00:00:01
+Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition    Info: Copyright (C) 2016  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and its AMPP partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel MegaCore Function License Agreement, or other     Info: applicable license agreement, including, without limitation,     Info: that your use is for the sole purpose of programming logic     Info: devices manufactured by Intel and sold by Intel or its     Info: authorized distributors.  Please refer to the applicable     Info: agreement for further details.    Info: Processing started: Tue May  8 17:08:26 2018Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/ microprocessor -c microprocessorWarning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.Info (204019): Generated file microprocessor.vho in folder "/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim//" for EDA simulation toolInfo: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning    Info: Peak virtual memory: 1131 megabytes    Info: Processing ended: Tue May  8 17:08:28 2018    Info: Elapsed time: 00:00:02    Info: Total CPU time (on all processors): 00:00:02
 Completed successfully. 
 
 **** Generating the ModelSim .do script ****
@@ -37,41 +37,40 @@ Reading pref.tcl
 # do microprocessor.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 10:01:52 on May 07,2018
+# Start time: 17:08:29 on May 08,2018
 # vcom -work work microprocessor.vho 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
-# -- Loading package std_logic_1164# -- Loading package altera_lnsim_components
+# -- Loading package std_logic_1164
+# -- Loading package altera_lnsim_components
 # -- Loading package VITAL_Timing
 # -- Loading package VITAL_Primitives
-# -- Loading package cyclonev_atom_pack
-# -- Loading package cyclonev_components
+# -- Loading package cyclonev_atom_pack# -- Loading package cyclonev_components
 # -- Compiling entity ALU
 # -- Compiling architecture structure of ALU
-# End time: 10:01:52 on May 07,2018, Elapsed time: 0:00:00
+# End time: 17:08:30 on May 08,2018, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 10:01:52 on May 07,2018# vcom -work work Waveform.vwf.vht # -- Loading package STANDARD
+# Start time: 17:08:30 on May 08,2018# vcom -work work Waveform2.vwf.vht # -- Loading package STANDARD
 # -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity ALU_vhd_vec_tst
+# -- Loading package std_logic_1164# -- Compiling entity ALU_vhd_vec_tst
 # -- Compiling architecture ALU_arch of ALU_vhd_vec_tst
-# End time: 10:01:53 on May 07,2018, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# vsim -novopt -c -t 1ps -L cyclonev -L altera -L altera_mf -L 220model -L sgate -L altera_lnsim work.alu_vhd_vec_tst # Start time: 10:01:53 on May 07,2018# Loading std.standard# Loading std.textio(body)# Loading ieee.std_logic_1164(body)# Loading work.alu_vhd_vec_tst(alu_arch)# Loading altera_lnsim.altera_lnsim_components# Loading ieee.vital_timing(body)# Loading ieee.vital_primitives(body)# Loading cyclonev.cyclonev_atom_pack(body)# Loading cyclonev.cyclonev_components# Loading work.alu(structure)# Loading ieee.std_logic_arith(body)# Loading cyclonev.cyclonev_io_obuf(arch)# Loading cyclonev.cyclonev_io_ibuf(arch)# Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)# ** Warning: Design size of 32483 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.# Expect performance to be adversely affected.
+# End time: 17:08:31 on May 08,2018, Elapsed time: 0:00:01# Errors: 0, Warnings: 0
+# vsim -novopt -c -t 1ps -L cyclonev -L altera -L altera_mf -L 220model -L sgate -L altera_lnsim work.alu_vhd_vec_tst # Start time: 17:08:31 on May 08,2018# Loading std.standard# Loading std.textio(body)# Loading ieee.std_logic_1164(body)# Loading work.alu_vhd_vec_tst(alu_arch)# Loading altera_lnsim.altera_lnsim_components# Loading ieee.vital_timing(body)# Loading ieee.vital_primitives(body)# Loading cyclonev.cyclonev_atom_pack(body)# Loading cyclonev.cyclonev_components# Loading work.alu(structure)# Loading ieee.std_logic_arith(body)# Loading cyclonev.cyclonev_io_obuf(arch)# Loading cyclonev.cyclonev_io_ibuf(arch)# Loading cyclonev.cyclonev_mac(behavior)# Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)# ** Warning: (vsim-3015) (): [PCDPC] - Port size () does not match connection size () for .#    Time: 0 ps  Iteration: 0  Protected: /alu_vhd_vec_tst/i1/\Mult0~8\/inst/ File: nofile# ** Warning: (vsim-3015) (): [PCDPC] - Port size () does not match connection size () for .#    Time: 0 ps  Iteration: 0  Protected: /alu_vhd_vec_tst/i1/\Mult0~8\/inst/ File: nofile# ** Warning: Design size of 365005 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.# Expect performance to be adversely affected.
 # after#32
-# End time: 10:01:53 on May 07,2018, Elapsed time: 0:00:00# Errors: 0, Warnings: 1
+# Simulation time: 0 ps
+# End time: 17:08:36 on May 08,2018, Elapsed time: 0:00:05# Errors: 0, Warnings: 3
 Completed successfully. 
 
 **** Converting ModelSim VCD to vector waveform ****
 
-Reading /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/Waveform.vwf...
+Reading /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/Waveform2.vwf...
 
 Reading /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/microprocessor.msim.vcd...
 
 Processing channel transitions... 
 
-Writing the resulting VWF to /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/microprocessor_20180507100153.sim.vwf
+Writing the resulting VWF to /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/microprocessor_20180508170837.sim.vwf
 
 Finished VCD to VWF conversion.
 

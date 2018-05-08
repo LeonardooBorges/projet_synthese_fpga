@@ -1,5 +1,5 @@
 EDA Netlist Writer report for microprocessor
-Mon May  7 10:01:51 2018
+Tue May  8 17:08:28 2018
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
 
 
@@ -37,7 +37,7 @@ agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Mon May  7 10:01:51 2018 ;
+; EDA Netlist Writer Status ; Successful - Tue May  8 17:08:28 2018 ;
 ; Revision Name             ; microprocessor                        ;
 ; Top-level Entity Name     ; ALU                                   ;
 ; Family                    ; Cyclone V                             ;
@@ -95,15 +95,14 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: devices manufactured by Intel and sold by Intel or its 
     Info: authorized distributors.  Please refer to the applicable 
     Info: agreement for further details.
-    Info: Processing started: Mon May  7 10:01:49 2018
+    Info: Processing started: Tue May  8 17:08:26 2018
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=vhdl --output_directory=/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim/ microprocessor -c microprocessor
-Info (119006): Selected device 5CEBA4F23C7 for design "microprocessor"
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file microprocessor.vho in folder "/home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 1114 megabytes
-    Info: Processing ended: Mon May  7 10:01:51 2018
+    Info: Peak virtual memory: 1131 megabytes
+    Info: Processing ended: Tue May  8 17:08:28 2018
     Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Total CPU time (on all processors): 00:00:02
 
 

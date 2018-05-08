@@ -1,5 +1,5 @@
 Analysis & Synthesis report for microprocessor
-Mon May  7 09:58:00 2018
+Tue May  8 16:23:22 2018
 Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
 
 
@@ -12,11 +12,14 @@ Quartus Prime Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
   4. Analysis & Synthesis Source Files Read
   5. Analysis & Synthesis Resource Usage Summary
   6. Analysis & Synthesis Resource Utilization by Entity
-  7. General Register Statistics
-  8. Multiplexer Restructuring Statistics (Restructuring Performed)
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  7. Analysis & Synthesis DSP Block Usage Summary
+  8. User-Specified and Inferred Latches
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
+ 12. Post-Synthesis Netlist Statistics for Top Partition
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
 
 
 
@@ -43,17 +46,17 @@ agreement for further details.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon May  7 09:58:00 2018       ;
+; Analysis & Synthesis Status     ; Successful - Tue May  8 16:23:22 2018       ;
 ; Quartus Prime Version           ; 16.1.0 Build 196 10/24/2016 SJ Lite Edition ;
 ; Revision Name                   ; microprocessor                              ;
 ; Top-level Entity Name           ; ALU                                         ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 100                                         ;
+; Total pins                      ; 101                                         ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
-; Total DSP Blocks                ; 0                                           ;
+; Total DSP Blocks                ; 2                                           ;
 ; Total HSSI RX PCSs              ; 0                                           ;
 ; Total HSSI PMA RX Deserializers ; 0                                           ;
 ; Total HSSI TX PCSs              ; 0                                           ;
@@ -150,50 +153,120 @@ agreement for further details.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                         ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                  ; Library ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
-; alu.vhd                          ; yes             ; User VHDL File  ; /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd ;         ;
-+----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                     ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                 ; Library ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------+---------+
+; alu.vhd                          ; yes             ; User VHDL File               ; /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd                ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; /home/leonardo/intelFPGA_lite/16.1/quartus/libraries/megafunctions/lpm_divide.tdf            ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; /home/leonardo/intelFPGA_lite/16.1/quartus/libraries/megafunctions/abs_divider.inc           ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; /home/leonardo/intelFPGA_lite/16.1/quartus/libraries/megafunctions/sign_div_unsign.inc       ;         ;
+; aglobal161.inc                   ; yes             ; Megafunction                 ; /home/leonardo/intelFPGA_lite/16.1/quartus/libraries/megafunctions/aglobal161.inc            ;         ;
+; db/lpm_divide_rqo.tdf            ; yes             ; Auto-Generated Megafunction  ; /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/lpm_divide_rqo.tdf  ;         ;
+; db/abs_divider_4dg.tdf           ; yes             ; Auto-Generated Megafunction  ; /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/abs_divider_4dg.tdf ;         ;
+; db/alt_u_div_o2f.tdf             ; yes             ; Auto-Generated Megafunction  ; /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/alt_u_div_o2f.tdf   ;         ;
+; db/lpm_abs_4p9.tdf               ; yes             ; Auto-Generated Megafunction  ; /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/lpm_abs_4p9.tdf     ;         ;
++----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 63          ;
-;                                             ;             ;
-; Combinational ALUT usage for logic          ; 111         ;
-;     -- 7 input functions                    ; 0           ;
-;     -- 6 input functions                    ; 14          ;
-;     -- 5 input functions                    ; 5           ;
-;     -- 4 input functions                    ; 61          ;
-;     -- <=3 input functions                  ; 31          ;
-;                                             ;             ;
-; Dedicated logic registers                   ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 100         ;
-;                                             ;             ;
-; Total DSP Blocks                            ; 0           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; OP[1]~input ;
-; Maximum fan-out                             ; 65          ;
-; Total fan-out                               ; 610         ;
-; Average fan-out                             ; 1.96        ;
-+---------------------------------------------+-------------+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimate of Logic utilization (ALMs needed) ; 928        ;
+;                                             ;            ;
+; Combinational ALUT usage for logic          ; 1690       ;
+;     -- 7 input functions                    ; 2          ;
+;     -- 6 input functions                    ; 164        ;
+;     -- 5 input functions                    ; 632        ;
+;     -- 4 input functions                    ; 504        ;
+;     -- <=3 input functions                  ; 388        ;
+;                                             ;            ;
+; Dedicated logic registers                   ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 101        ;
+;                                             ;            ;
+; Total DSP Blocks                            ; 2          ;
+;                                             ;            ;
+; Maximum fan-out node                        ; A[3]~input ;
+; Maximum fan-out                             ; 72         ;
+; Total fan-out                               ; 7892       ;
+; Average fan-out                             ; 4.17       ;
++---------------------------------------------+------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                    ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |ALU                       ; 111 (111)           ; 0 (0)                     ; 0                 ; 0          ; 100  ; 0            ; |ALU                ; ALU         ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                 ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node            ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                               ; Entity Name     ; Library Name ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------+-----------------+--------------+
+; |ALU                                  ; 1690 (479)          ; 0 (0)                     ; 0                 ; 2          ; 101  ; 0            ; |ALU                                                                                              ; ALU             ; work         ;
+;    |lpm_divide:Div0|                  ; 1211 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0                                                                              ; lpm_divide      ; work         ;
+;       |lpm_divide_rqo:auto_generated| ; 1211 (0)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_rqo:auto_generated                                                ; lpm_divide_rqo  ; work         ;
+;          |abs_divider_4dg:divider|    ; 1211 (32)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider                        ; abs_divider_4dg ; work         ;
+;             |alt_u_div_o2f:divider|   ; 1115 (1115)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider|alt_u_div_o2f:divider  ; alt_u_div_o2f   ; work         ;
+;             |lpm_abs_4p9:my_abs_den|  ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider|lpm_abs_4p9:my_abs_den ; lpm_abs_4p9     ; work         ;
+;             |lpm_abs_4p9:my_abs_num|  ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_rqo:auto_generated|abs_divider_4dg:divider|lpm_abs_4p9:my_abs_num ; lpm_abs_4p9     ; work         ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary    ;
++-----------------------------------+-------------+
+; Statistic                         ; Number Used ;
++-----------------------------------+-------------+
+; Two Independent 18x18             ; 1           ;
+; Sum of two 18x18                  ; 1           ;
+; Total number of DSP blocks        ; 2           ;
+;                                   ;             ;
+; Fixed Point Unsigned Multiplier   ; 1           ;
+; Fixed Point Mixed Sign Multiplier ; 2           ;
++-----------------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; aux_y[0]                                            ; Mux32               ; yes                    ;
+; aux_y[1]                                            ; Mux32               ; yes                    ;
+; aux_y[2]                                            ; Mux32               ; yes                    ;
+; aux_y[3]                                            ; Mux32               ; yes                    ;
+; aux_y[4]                                            ; Mux32               ; yes                    ;
+; aux_y[5]                                            ; Mux32               ; yes                    ;
+; aux_y[6]                                            ; Mux32               ; yes                    ;
+; aux_y[7]                                            ; Mux32               ; yes                    ;
+; aux_y[8]                                            ; Mux32               ; yes                    ;
+; aux_y[9]                                            ; Mux32               ; yes                    ;
+; aux_y[10]                                           ; Mux32               ; yes                    ;
+; aux_y[11]                                           ; Mux32               ; yes                    ;
+; aux_y[12]                                           ; Mux32               ; yes                    ;
+; aux_y[13]                                           ; Mux32               ; yes                    ;
+; aux_y[14]                                           ; Mux32               ; yes                    ;
+; aux_y[15]                                           ; Mux32               ; yes                    ;
+; aux_y[16]                                           ; Mux32               ; yes                    ;
+; aux_y[17]                                           ; Mux32               ; yes                    ;
+; aux_y[18]                                           ; Mux32               ; yes                    ;
+; aux_y[19]                                           ; Mux32               ; yes                    ;
+; aux_y[20]                                           ; Mux32               ; yes                    ;
+; aux_y[21]                                           ; Mux32               ; yes                    ;
+; aux_y[22]                                           ; Mux32               ; yes                    ;
+; aux_y[23]                                           ; Mux32               ; yes                    ;
+; aux_y[24]                                           ; Mux32               ; yes                    ;
+; aux_y[25]                                           ; Mux32               ; yes                    ;
+; aux_y[26]                                           ; Mux32               ; yes                    ;
+; aux_y[27]                                           ; Mux32               ; yes                    ;
+; aux_y[28]                                           ; Mux32               ; yes                    ;
+; aux_y[29]                                           ; Mux32               ; yes                    ;
+; aux_y[30]                                           ; Mux32               ; yes                    ;
+; aux_y[31]                                           ; Mux32               ; yes                    ;
+; Number of user-specified and inferred latches = 32  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
 +------------------------------------------------------+
@@ -216,10 +289,39 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; No         ; |ALU|Add0                  ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 96 LEs               ; 64 LEs                 ; No         ; |ALU|Mux16                 ;
-; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |ALU|Add0                  ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |ALU|ShiftLeft0            ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |ALU|ShiftLeft0            ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |ALU|ShiftRight0           ;
+; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |ALU|ShiftLeft0            ;
+; 4:1                ; 50 bits   ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |ALU|ShiftRight0           ;
+; 18:1               ; 12 bits   ; 144 LEs       ; 132 LEs              ; 12 LEs                 ; No         ; |ALU|Mux19                 ;
+; 18:1               ; 11 bits   ; 132 LEs       ; 132 LEs              ; 0 LEs                  ; No         ; |ALU|Mux4                  ;
+; 21:1               ; 3 bits    ; 42 LEs        ; 39 LEs               ; 3 LEs                  ; No         ; |ALU|Mux28                 ;
+; 21:1               ; 3 bits    ; 42 LEs        ; 42 LEs               ; 0 LEs                  ; No         ; |ALU|Mux3                  ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Div0 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 32             ; Untyped                ;
+; LPM_WIDTHD             ; 32             ; Untyped                ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_rqo ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-----------------------------------------------------+
@@ -227,19 +329,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 111                         ;
-;     arith             ; 33                          ;
-;         2 data inputs ; 1                           ;
-;         4 data inputs ; 32                          ;
-;     normal            ; 78                          ;
-;         3 data inputs ; 30                          ;
-;         4 data inputs ; 29                          ;
-;         5 data inputs ; 5                           ;
-;         6 data inputs ; 14                          ;
-; boundary_port         ; 100                         ;
+; arriav_lcell_comb     ; 1690                        ;
+;     arith             ; 722                         ;
+;         0 data inputs ; 60                          ;
+;         1 data inputs ; 1                           ;
+;         2 data inputs ; 138                         ;
+;         3 data inputs ; 28                          ;
+;         4 data inputs ; 2                           ;
+;         5 data inputs ; 493                         ;
+;     extend            ; 2                           ;
+;         7 data inputs ; 2                           ;
+;     normal            ; 925                         ;
+;         2 data inputs ; 41                          ;
+;         3 data inputs ; 82                          ;
+;         4 data inputs ; 499                         ;
+;         5 data inputs ; 139                         ;
+;         6 data inputs ; 164                         ;
+;     shared            ; 41                          ;
+;         0 data inputs ; 3                           ;
+;         2 data inputs ; 35                          ;
+;         4 data inputs ; 3                           ;
+; arriav_mac            ; 2                           ;
+; boundary_port         ; 101                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 6.20                        ;
-; Average LUT depth     ; 4.90                        ;
+; Max LUT depth         ; 99.80                       ;
+; Average LUT depth     ; 74.75                       ;
 +-----------------------+-----------------------------+
 
 
@@ -248,7 +362,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:02     ;
+; Top            ; 00:00:13     ;
 +----------------+--------------+
 
 
@@ -258,7 +372,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 16.1.0 Build 196 10/24/2016 SJ Lite Edition
-    Info: Processing started: Mon May  7 09:56:48 2018
+    Info: Processing started: Tue May  8 16:22:02 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off microprocessor -c microprocessor
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20029): Only one processor detected - disabling parallel compilation
@@ -272,19 +386,134 @@ Info (12021): Found 2 design units, including 1 entities, in source file alu.vhd
     Info (12022): Found design unit 1: ALU-behavioral File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 15
     Info (12023): Found entity 1: ALU File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 5
 Info (12127): Elaborating entity "alu" for the top level hierarchy
-Warning (10492): VHDL Process Statement warning at alu.vhd(30): signal "aux_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 30
-Warning (10492): VHDL Process Statement warning at alu.vhd(35): signal "aux_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 35
+Warning (10492): VHDL Process Statement warning at alu.vhd(38): signal "aux_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 38
+Warning (10492): VHDL Process Statement warning at alu.vhd(43): signal "aux_y" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 43
+Warning (10631): VHDL Process Statement warning at alu.vhd(18): inferring latch(es) for signal or variable "aux_y", which holds its previous value in one or more paths through the process File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[0]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[1]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[2]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[3]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[4]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[5]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[6]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[7]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[8]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[9]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[10]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[11]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[12]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[13]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[14]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[15]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[16]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[17]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[18]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[19]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[20]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[21]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[22]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[23]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[24]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[25]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[26]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[27]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[28]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[29]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[30]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (10041): Inferred latch for "aux_y[31]" at alu.vhd(18) File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+Info (278001): Inferred 1 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0" File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 35
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0" File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 35
+Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter: File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 35
+    Info (12134): Parameter "LPM_WIDTHN" = "32"
+    Info (12134): Parameter "LPM_WIDTHD" = "32"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_rqo.tdf
+    Info (12023): Found entity 1: lpm_divide_rqo File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/lpm_divide_rqo.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_4dg.tdf
+    Info (12023): Found entity 1: abs_divider_4dg File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/abs_divider_4dg.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_o2f.tdf
+    Info (12023): Found entity 1: alt_u_div_o2f File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/alt_u_div_o2f.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_4p9.tdf
+    Info (12023): Found entity 1: lpm_abs_4p9 File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/db/lpm_abs_4p9.tdf Line: 23
+Warning (13012): Latch aux_y[0] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[2] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[1] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[2] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[3] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[4] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[5] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[6] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[7] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[8] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[9] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[10] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[11] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[12] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[13] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[14] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[15] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[2] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[16] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[17] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[18] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[19] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[20] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[21] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[22] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[23] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[24] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[25] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[26] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[27] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[28] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[29] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[30] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[3] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
+Warning (13012): Latch aux_y[31] has unsafe behavior File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 18
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal OP[2] File: /home/leonardo/Documents/Supelec/1A/project_fpga/projet_synthese_fpga/alu.vhd Line: 9
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 211 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 67 input pins
+Info (21057): Implemented 1793 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 68 input pins
     Info (21059): Implemented 33 output pins
-    Info (21061): Implemented 111 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 1019 megabytes
-    Info: Processing ended: Mon May  7 09:58:00 2018
-    Info: Elapsed time: 00:01:12
-    Info: Total CPU time (on all processors): 00:00:29
+    Info (21061): Implemented 1690 logic cells
+    Info (21062): Implemented 2 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 68 warnings
+    Info: Peak virtual memory: 1069 megabytes
+    Info: Processing ended: Tue May  8 16:23:22 2018
+    Info: Elapsed time: 00:01:20
+    Info: Total CPU time (on all processors): 00:00:34
 
 
