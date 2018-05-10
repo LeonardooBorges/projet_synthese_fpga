@@ -1,0 +1,391 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+entity CONTROL is
+	port (
+		OP       : in  std_logic_vector(5 downto 0);  -- opcode
+		func     : in  std_logic_vector(5 downto 0);  -- func code
+		RegDst   : out std_logic;  -- Register destination
+		Jump     : out std_logic;
+		JumpR    : out std_logic;  -- Jump register
+		BEQ      : out std_logic;  -- Branch if equals
+		MemToReg : out std_logic;  -- Memory to register
+		ALUop    : out std_logic_vector(3 downto 0);  -- ALU op code
+		MemWrite : out std_logic;  -- Memory write
+		ALUsrc1  : out std_logic;
+		ALUsrc2  : out std_logic;
+		RegWrite : out std_logic;  -- Register write
+		WritePC  : out std_logic;
+		BNEQ     : out std_logic;  -- Branch if not equals
+		LoadBU   : out std_logic;  -- Load byte unsigned
+		LoadB    : out std_logic;  -- Load byte
+		JumpAl   : out std_logic   -- Jump and link
+	);	
+end CONTROL;
+
+architecture behavioral of CONTROL is
+
+begin
+	process(OP, func) begin
+		case OP is
+			when "000000" => -- R type
+				case func is
+					when "000000" => -- sll
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0011";
+						MemWrite <= '0';
+						ALUsrc1  <= '1';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "000010" => -- srl
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0010";
+						MemWrite <= '0';
+						ALUsrc1  <= '1';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "001000" => -- jr
+						RegDst   <= '-';
+						Jump     <= '1';
+						JumpR    <= '1';
+						BEQ      <= '0';
+						MemToReg <= '-';
+						ALUop    <= "0000";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '0';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "100000" => -- add
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0000";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "100010" => -- sub
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0001";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "100100" => -- and
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0101";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "100101" => -- or
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0110";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "100111" => -- nor
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "1000";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+					when "101010" => -- slt 
+						RegDst   <= '1';
+						Jump     <= '0';
+						JumpR    <= '-';
+						BEQ      <= '0';
+						MemToReg <= '0';
+						ALUop    <= "0100";
+						MemWrite <= '0';
+						ALUsrc1  <= '0';
+						ALUsrc2  <= '0';
+						RegWrite <= '1';
+						WritePC  <= '0';
+						BNEQ     <= '0';
+						LoadBU   <= '0';
+						LoadB    <= '0';
+						JumpAl   <= '0';
+						when others => NULL;
+				end case;
+			when "000010" => -- j
+				RegDst   <= '-';
+				Jump     <= '1';
+				JumpR    <= '0';
+				BEQ      <= '-';
+				MemToReg <= '-';
+				ALUop    <= (others => '-');
+				MemWrite <= '0';
+				ALUsrc1  <= '-';
+				ALUsrc2  <= '-';
+				RegWrite <= '0';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "000011" => -- jal
+				RegDst   <= '-';
+				Jump     <= '1';
+				JumpR    <= '0';
+				BEQ      <= '-';
+				MemToReg <= '-';
+				ALUop    <= (others => '-');
+				MemWrite <= '0';
+				ALUsrc1  <= '-';
+				ALUsrc2  <= '-';
+				RegWrite <= '1';
+				WritePC  <= '1';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '1';
+			when "000100" => -- beq
+				RegDst   <= '-';
+				Jump     <= '0';
+				JumpR    <= '-';
+				BEQ      <= '1';
+				MemToReg <= '-';
+				ALUop    <= "0001"; -- minus
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '0';
+				RegWrite <= '0';
+				WritePC  <= '-';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "000101" => -- bne
+				RegDst   <= '-';
+				Jump     <= '0';
+				JumpR    <= '-';
+				BEQ      <= '0';
+				MemToReg <= '-';
+				ALUop    <= "0001";
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '0';
+				RegWrite <= '0';
+				WritePC  <= '-';
+				BNEQ     <= '1';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "001000" => -- addi
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '0';
+				ALUop    <= "0000"; -- plus
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "001010" => --slti
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '0';
+				ALUop    <= "0100"; -- less than
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "001100" => -- andi
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '0';
+				ALUop    <= "0101"; -- and
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "001101" => -- ori
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '0';
+				ALUop    <= "0110"; -- or
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "001110" => -- xori
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '0';
+				ALUop    <= "0111"; -- xor
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "011000" => -- lb
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '1';
+				ALUop    <= "0000"; -- plus
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '1';
+				JumpAl   <= '0';
+			when "011011" => -- lw
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '1';
+				ALUop    <= "0000";  -- plus
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when "011100" => -- lbu
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '1';
+				ALUop    <= "0000"; -- plus
+				MemWrite <= '0';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '1';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '1';
+				LoadB    <= '1';
+				JumpAl   <= '0';
+			when "100011" => -- sw
+				RegDst   <= '0';
+				Jump     <= '0';
+				JumpR    <= '0';
+				BEQ      <= '0';
+				MemToReg <= '1';
+				ALUop    <= "0000"; -- plus
+				MemWrite <= '1';
+				ALUsrc1  <= '0';
+				ALUsrc2  <= '1';
+				RegWrite <= '0';
+				WritePC  <= '0';
+				BNEQ     <= '0';
+				LoadBU   <= '0';
+				LoadB    <= '0';
+				JumpAl   <= '0';
+			when others => NULL;
+		end case;
+	end process;
+end behavioral;
