@@ -27,7 +27,7 @@ Registers = {'$zero':0,'$at':1,'$v0':2,'$v1':3,'$a0':4,
 for r in Registers:
     Registers[r] = '{0:05b}'.format(Registers[r])
 
-TypeR=['sll','srl','jr','add','sub','and','or','nor','slt']
+TypeR=['sll','srl','jr','add','sub','and','or','nor','slt','mult','div']
 TypeI=['beq','bne','addi','slti','andi','ori',
         'xori','lb','lw','lbu','sw','sb']
 TypeJ=['j','jal']
