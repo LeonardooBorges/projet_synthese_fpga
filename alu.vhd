@@ -1,12 +1,13 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+use work.constants.all;
 
 entity ALU is
 	port (
 		A  : in  signed(31 downto 0);   -- operand A
 		B  : in  signed(31 downto 0);   -- operand B
-		OP : in  unsigned(3 downto 0); -- opcode
+		OP : in  std_logic_vector(3 downto 0); -- opcode
 		Y  : out signed(31 downto 0);  -- operation result
 		Z  : out std_logic -- zero
 	);	
@@ -17,22 +18,22 @@ signal aux_y : signed(31 downto 0);
 begin
 	process(A, B, OP) begin
 		case OP is  -- decode the opcode and perform the operation:
-			when "0000" =>  aux_y <= A + B;                     -- add
-			when "0001" =>  aux_y <= A - B;                     -- subtract
-			when "0010" =>  aux_y <= SHIFT_RIGHT(B, TO_INTEGER(A)); -- shift right
-			when "0011" =>  aux_y <= SHIFT_LEFT(B, TO_INTEGER(A));  -- shift left
-			when "0100" =>                                      -- less then
+			when alu_add =>  aux_y <= A + B;
+			when alu_sub =>  aux_y <= A - B;
+			when alu_srl =>  aux_y <= SHIFT_RIGHT(B, TO_INTEGER(A));
+			when alu_sll =>  aux_y <= SHIFT_LEFT(B, TO_INTEGER(A));
+			when alu_slt =>
 				if A < B then
 					aux_y <= x"00000001";
 				else
 					aux_y <= (others => '0');
 				end if;
-			when "0101" =>  aux_y <= A and B;                  -- bitwise AND
-			when "0110" =>  aux_y <= A or B;                   -- bitwise OR
-			when "0111" =>  aux_y <= A xor B;                  -- bitwise XOR
-			when "1000" =>  aux_y <= A nor B;                  -- bitwise NOR
+			when alu_and =>  aux_y <= A and B;
+			when alu_or  =>  aux_y <= A or B;
+			when alu_xor =>  aux_y <= A xor B;
+			when alu_nor =>  aux_y <= A nor B;
 			when "1001" =>  aux_y <= TO_SIGNED(TO_INTEGER(A)*TO_INTEGER(B),32);                  -- bitwise NOR
-			when "1010" =>  aux_y <= A/B;                  -- bitwise NOR
+			when "1010" =>  aux_y <= A/B;
 			when others => NULL;
 		end case;
 		if aux_y = 0 then 

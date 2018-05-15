@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
+USE work.constants.all;
 
 entity tb_control is
 end tb_control;
@@ -98,10 +99,9 @@ begin
 	begin
 	
 		-- Tests
-		check_code("000000","000000","10-000000000100000");
-		check_code("000000","000000","10-000011010100001");
-		check_code("000000","000001","10-000001000100000");
-		check_code("000000","000001","10-000011010100000");
+		check_code(R_type, c_and,"10-00" & alu_and & "000100--0");
+		check_code(R_type, c_and,"10-00" & alu_and & "000100--1");
+		check_code(R_type, c_and,"10-11" & alu_and & "000100--1");
 		wait;
 		
 	end process simulation;
