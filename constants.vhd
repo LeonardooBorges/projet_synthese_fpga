@@ -32,6 +32,7 @@ package constants is
 	constant c_beq   : std_logic_vector(5 downto 0) := "000100";
 	constant c_bne   : std_logic_vector(5 downto 0) := "000101";
 	
+	constant op_imm  : std_logic_vector(2 downto 0) := "001";
 	constant c_addi  : std_logic_vector(5 downto 0) := "001000";
 	constant c_slti  : std_logic_vector(5 downto 0) := "001010";
 	constant c_andi  : std_logic_vector(5 downto 0) := "001100";
@@ -41,6 +42,7 @@ package constants is
 	constant c_lb    : std_logic_vector(5 downto 0) := "011000";
 	constant c_lw    : std_logic_vector(5 downto 0) := "011011";
 	constant c_lbu   : std_logic_vector(5 downto 0) := "011100";
+	constant c_sb    : std_logic_vector(5 downto 0) := "100000";
 	constant c_sw    : std_logic_vector(5 downto 0) := "100011";
 	
 end constants;
