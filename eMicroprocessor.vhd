@@ -4,7 +4,7 @@ USE IEEE.NUMERIC_STD.ALL;
 
 ENTITY eMicroprocessor IS
 	PORT (
-		SIGNAL micro_clk, micro_rst : IN STD_LOGIC
+		SIGNAL micro_clk, control_rst, regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC
 	);
 END ENTITY eMicroprocessor;
 
@@ -13,6 +13,7 @@ ARCHITECTURE aMicroprocessor OF eMicroprocessor IS
 	PORT (
 			SIGNAL Jmp, JmpR, BEQ, BNEQ, RegDst, Jmpal, RegWrite, MemWrite : IN STD_LOGIC;
 			SIGNAL clk, AluSrc1, AluSrc2, loadb, loadbu, MemtoReg, storeb, pc_en : IN STD_LOGIC;
+			SIGNAL regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC;
 			SIGNAL AluOP : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 			SIGNAL OPcode, funct : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
 	);
@@ -56,11 +57,12 @@ ARCHITECTURE aMicroprocessor OF eMicroprocessor IS
 		RegDst => micro_RegDst, Jmpal => micro_Jmpal, RegWrite => micro_RegWrite, MemWrite => micro_MemWrite,
 		clk => micro_clk, AluSrc1 => micro_AluSrc1, AluSrc2 => micro_AluSrc2, OPcode => micro_OPcode,
 		loadb => micro_loadb, loadbu => micro_loadbu, MemtoReg => micro_MemtoReg, funct => micro_funct,
-		AluOP => micro_AluOP, storeb => micro_storeb, pc_en => micro_pc_en);
+		AluOP => micro_AluOP, storeb => micro_storeb, pc_en => micro_pc_en,
+		regfile_rst => regfile_rst, pc_rst => pc_rst, memdata_rst => memdata_rst);
 	
 	instControl : control_sync
 	PORT MAP(
-	CLOCK => micro_clk,RESET => micro_rst,OP => micro_OPcode,func => micro_funct,RegDst => micro_RegDst,
+	CLOCK => micro_clk,RESET => control_rst,OP => micro_OPcode,func => micro_funct,RegDst => micro_RegDst,
 	beq => micro_BEQ, MemToReg => micro_MemtoReg, ALUop => micro_AluOP, MemWrite => micro_MemWrite,
 	ALUsrc2 => micro_AluSrc2,RegWrite => micro_RegWrite,bne => micro_BNEQ,LoadBU => micro_loadbu,
 	LoadB => micro_loadb,storeB => micro_storeb,JumpAL => micro_Jmpal,PC_EN => micro_pc_en,

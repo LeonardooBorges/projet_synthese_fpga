@@ -41,7 +41,7 @@ SIGNAL		ob_PC_EN    :  std_logic;
 
 COMPONENT eMicroprocessor IS
 	PORT (
-		SIGNAL micro_clk, micro_rst : IN STD_LOGIC
+		SIGNAL micro_clk, control_rst, regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC
 	);
 END COMPONENT;
 	
@@ -75,7 +75,8 @@ BEGIN
 		'0' after 0.5 ns when tb_clk = '1';
 
 	instMicroprocessor : eMicroprocessor
-		PORT MAP(micro_clk => tb_clk, micro_rst => tb_rst);
+		PORT MAP(micro_clk => tb_clk, control_rst => tb_rst,
+		regfile_rst => tb_rst, pc_rst => tb_rst, memdata_rst => tb_rst);
 
 	PROCESS (GlobalRegFile)    
 	BEGIN
@@ -104,8 +105,10 @@ BEGIN
 	END PROCESS;
 	
 	PROCESS BEGIN
-		WAIT FOR 10 ns;
+		WAIT FOR 3 ns;
 		tb_rst <= '0';
+		WAIT FOR 50 ns;
+		tb_rst <= '1';
 	END PROCESS;
 	
 	

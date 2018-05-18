@@ -6,7 +6,7 @@ ENTITY eRegFile IS
 	PORT (
 		SIGNAL ReadAddr1, ReadAddr2, WriteAddr : IN INTEGER RANGE 0 TO 31;
 		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, RegWrite : IN STD_LOGIC;
+		SIGNAL clk, RegWrite, regfile_rst : IN STD_LOGIC;
 		SIGNAL ReadData1, ReadData2 : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
 END ENTITY eRegFile;
@@ -27,9 +27,11 @@ BEGIN
 	END LOOP;
 	END PROCESS;
 	
-	PROCESS (clk)
+	PROCESS (clk, regfile_rst)
 	BEGIN
-	IF rising_edge(clk) THEN
+	IF regfile_rst = '1' THEN
+		RegFile <= ((OTHERS => (OTHERS => '0')));
+	ELSIF rising_edge(clk) THEN
 		IF ReadAddr1=0 THEN
 			ReadData1 <= x"00000000";
 		ELSE

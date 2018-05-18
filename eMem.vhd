@@ -6,7 +6,7 @@ ENTITY eMem IS
 	PORT (
 		SIGNAL Address : IN STD_LOGIC_VECTOR (6 DOWNTO 0);
 		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, MemWrite, loadb, loadbu, storeb : IN STD_LOGIC;
+		SIGNAL clk, MemWrite, loadb, loadbu, storeb, memdata_rst : IN STD_LOGIC;
 		SIGNAL ReadData : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
 END ENTITY eMem;
@@ -26,13 +26,15 @@ BEGIN
    	END LOOP;
 	END PROCESS;
 
-	PROCESS (clk)
+	PROCESS (clk, memdata_rst)
 	VARIABLE WordNumb : INTEGER RANGE 0 TO 31;
 	VARIABLE ByteNumb : INTEGER RANGE 0 TO 3;
 	VARIABLE tmp : INTEGER RANGE 0 TO 31;
 	VARIABLE tmp2 : STD_LOGIC;
 	BEGIN
-		IF rising_edge(clk) THEN
+		IF memdata_rst = '1' THEN
+			mem <= ((OTHERS => (OTHERS => '0')));
+		ELSIF rising_edge(clk) THEN
 			WordNumb := to_integer(unsigned(Address))/4;
 			ByteNumb := to_integer(unsigned(Address)) rem 4;
 			tmp := 31-ByteNumb*8; -- Position of the first bit of the adressed byte

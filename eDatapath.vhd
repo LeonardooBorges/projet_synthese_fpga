@@ -6,6 +6,7 @@ ENTITY eDatapath IS
 	PORT (
 			SIGNAL Jmp, JmpR, BEQ, BNEQ, RegDst, Jmpal, RegWrite, MemWrite : IN STD_LOGIC;
 			SIGNAL clk, AluSrc1, AluSrc2, loadb, loadbu, MemtoReg, storeb, pc_en : IN STD_LOGIC;
+			SIGNAL regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC;
 			SIGNAL AluOP : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
 			SIGNAL OPcode, funct : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
 	);
@@ -39,7 +40,7 @@ COMPONENT eRegFile
 	PORT (
 		SIGNAL ReadAddr1, ReadAddr2, WriteAddr : IN INTEGER RANGE 0 TO 31;
 		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, RegWrite : IN STD_LOGIC;
+		SIGNAL clk, RegWrite, regfile_rst : IN STD_LOGIC;
 		SIGNAL ReadData1, ReadData2 : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
 END COMPONENT;
@@ -48,7 +49,7 @@ COMPONENT eMem
 	PORT (
 		SIGNAL Address : IN STD_LOGIC_VECTOR (6 DOWNTO 0);
 		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, MemWrite, loadb, loadbu, storeb : IN STD_LOGIC;
+		SIGNAL clk, MemWrite, loadb, loadbu, storeb, memdata_rst : IN STD_LOGIC;
 		SIGNAL ReadData : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 	);
 END COMPONENT;
@@ -75,12 +76,12 @@ RegFiletmp_WriteAddr <= to_integer(unsigned(RegFile_WriteAddr));
 InstMem : eInstMem
 PORT MAP(clk => clk, ReadAddr => InstMem_ReadAddr, Instruction31_0 => InstMem_Instruction31_0);
 RegFile : eRegFile
-PORT MAP(ReadAddr1 => RegFiletmp_ReadAddr1, 
+PORT MAP(ReadAddr1 => RegFiletmp_ReadAddr1, regfile_rst => regfile_rst,
 	ReadAddr2 => RegFiletmp_ReadAddr2, clk => clk,
 	WriteAddr => RegFiletmp_WriteAddr, WriteData => RegFile_WriteData,
 	ReadData1 => RegFile_ReadData1, ReadData2 => RegFile_ReadData2, RegWrite => RegWrite);
 Mem : eMem
-PORT MAP(Address => Mem_Address, WriteData => Mem_WriteData, ReadData => Mem_ReadData,
+PORT MAP(Address => Mem_Address, WriteData => Mem_WriteData, ReadData => Mem_ReadData, memdata_rst => memdata_rst,
 	clk => clk, MemWrite => MemWrite, loadb => loadb, loadbu => loadbu, storeb => storeb);
 cALU : ALU
 PORT MAP(A => signed(ALU_A), B => signed(ALU_B), std_logic_vector(Y) => ALU_Y,
@@ -103,10 +104,12 @@ ALU_B <= (31 DOWNTO 16 => InstMem_Instruction31_0(15)) & InstMem_Instruction31_0
 Mem_Address <= ALU_Y(6 DOWNTO 0);
 Mem_WriteData <= RegFile_ReadData2;
 
-PROCESS (clk)
+PROCESS (clk, pc_rst)
 	VARIABLE tmp : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	BEGIN
-	IF rising_edge(clk) THEN
+	IF pc_rst = '1' THEN
+		PC <= x"00000000";
+	ELSIF rising_edge(clk) THEN
 		IF pc_en='1' THEN
 			IF Jmp='1' AND JmpR='1' THEN
 				PC <= ALU_Y;
