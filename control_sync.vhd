@@ -177,7 +177,7 @@ begin
 					RegWrite <= '0';
 				end if;
 				
-				if (OP = R_type and func = c_jr) or OP = c_j or OP = c_jal then	-- aqui nao é func = jr? isso causa um bug porque c_jr = c_addi
+				if (OP = R_type and func = c_jr) or OP = c_j or OP = c_jal then
 					Jump <= '1';
 				elsif not (OP = c_beq or OP = c_bne) then
 					Jump <= '0';
@@ -189,7 +189,7 @@ begin
 					JumpR <= '0';
 				end if;
 				
-				if OP = c_jr or OP = c_beq or OP = c_bne then
+				if (OP = R_type and func = c_jr) or OP = c_beq or OP = c_bne then
 					ALUsrc1 <= '0';
 					ALUsrc2 <= '0';
 				end if;
@@ -200,7 +200,7 @@ begin
 				elsif OP = c_bne then
 					beq <= '0';
 					bne <= '1';
-				elsif not (OP = c_jr or OP = c_j or OP = c_jal) then
+				elsif not ((OP = R_type and func = c_jr) or OP = c_j or OP = c_jal) then
 					beq <= '0';
 					bne <= '0';
 				end if;

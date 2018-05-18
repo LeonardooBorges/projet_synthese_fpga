@@ -1,18 +1,12 @@
-loop:
-	addi	$t1,$t1,3	# i = i + 1
-	add	$t2,$t5,$t1	# sum = sum + i
-	j	loop
-add	$t0,$t1,$t2	#  $t0 = $t1 + $t2;   add as signed (2's complement) integers
-sub	$t2,$t3,$t4	#  $t2 = $t3 Ð $t4
-addi	$t2,$t3,5	#  $t2 = $t3 + 5;   "add immediate" (no sub immediate)
-	sll	$t1,$t2,7
-exit:
-sw	$zero,23($t0)
-add	$t1,$t6,$t7	#  $t1 = $t6 + $t7;   add as unsigned integers
-sub	$t1,$t6,$t7
-	jr	$t3
-	beq	$t0,$t1,exit	# if i = N, continue
-	jal	exit
-	j	4
-	bne	$t4,$t1,8	# if i = N, continue
-beq	$t0,$t1,exit	# if i = N, continu
+	addi	$t0,$zero,3	# i = i + 1 0
+	addi	$t1,$zero,4	# i = i + 1 4
+	addi	$t2,$zero,5	# i = i + 1 8
+	addi	$t3,$zero,6	# i = i + 1 12
+	beq	$t7,$t8,4	# 16
+	addi	$t4,$zero,7	# i = i + 1 20
+	addi	$t5,$zero,8	# i = i + 1 24
+	addi	$t6,$zero,9	# i = i + 1 28
+	addi	$t7,$zero,10	# i = i + 1 32
+	sb	$t3,11($t1)	# sum = sum + i 36
+	addi	$t5,$zero,255	# i = i + 1 40
+	sb	$t5,12($t1)	# sum = sum + i 44

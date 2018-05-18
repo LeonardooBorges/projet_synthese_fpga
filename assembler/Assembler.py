@@ -46,6 +46,15 @@ for line in code:
     if line and tmp[0] not in TypeR and tmp[0] not in TypeI and tmp[0] not in TypeJ:
         Labels[tmp[0][:-1]] = addr
     elif line:
+        addr += 1
+print(Labels)
+
+for line in code:
+    binary = ''
+    tmp = line.split()
+    if line and tmp[0] not in TypeR and tmp[0] not in TypeI and tmp[0] not in TypeJ:
+        binary = binary
+    elif line:
         binary += OPcode[tmp[0]]
         tmp1 = tmp[1].split(',')
         if tmp[0] in TypeR:
@@ -87,5 +96,4 @@ for line in code:
             else:
                 binary += '{0:026b}'.format(int(tmp1[0]))
         print(binary)
-        addr+=4
 
