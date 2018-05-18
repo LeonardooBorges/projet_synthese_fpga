@@ -102,16 +102,19 @@ begin
 	begin
 		case state is
 			when fetch =>
+				current_state <= "000";
 				PC_EN    <= '0';
 				MemWrite <= '0';
 				RegWrite <= '0';
 				
 			when decode =>
+				current_state <= "001";
 				PC_EN    <= '0';
 				MemWrite <= '0';
 				RegWrite <= '0';
 				
 			when execute =>
+			current_state <= "010";
 				PC_EN <= '0';
 				--MemWrite <= '1' when (OP = c_sb or OP = c_sw) else '0';			
 				if OP = c_sb or OP = c_sw then
@@ -122,7 +125,7 @@ begin
 				
 				if OP = R_type or OP(5 downto 3) = op_imm then
 					RegWrite <= '1';
-					MemToReg <= '0'; -- aqui nao é zero?
+					MemToReg <= '0';
 					JumpAL   <= '0';
 					--RegDst   <= '1' when OP = R_type else '0';
 					if OP = R_type then 
@@ -160,7 +163,32 @@ begin
 					storeB <= '1';
 				end if;
 				
+				if OP = R_type and func = c_sll then
+					ALUop <= alu_sll;
+				elsif OP = R_type and func = c_srl then
+					ALUop <= alu_srl;
+				elsif OP = R_type and func = c_mult then
+					ALUop <= alu_mult;
+				elsif OP = R_type and func = c_div then
+					ALUop <= alu_div;
+				elsif OP = R_type and func = c_sub then
+					ALUop <= alu_sub;
+				elsif (OP = R_type and func = c_and) or OP = c_addi then
+					ALUop <= alu_and;
+				elsif (OP = R_type and func = c_or) or OP = c_ori then
+					ALUop <= alu_or;
+				elsif (OP = R_type and func = c_xor) or OP = c_xori then
+					ALUop <= alu_xor;
+				elsif OP = R_type and func = c_nor then
+					ALUop <= alu_nor;
+				elsif (OP = R_type and func = c_slt) or OP = c_slti then
+					ALUop <= alu_slt;
+				elsif not (OP = c_beq or OP = c_bne) then
+					ALUop <= alu_add;
+				end if;
+				
 			when memory => 
+				current_state <= "011";
 				PC_EN    <= '0';
 				MemWrite <= '0';
 				RegWrite <= '1';
@@ -169,6 +197,7 @@ begin
 				JumpAL   <= '0';
 				
 			when write_back =>
+				current_state <= "100";
 				PC_EN    <= '1';
 				MemWrite <= '0';
 				if OP = c_jal then
@@ -192,6 +221,7 @@ begin
 				if (OP = R_type and func = c_jr) or OP = c_beq or OP = c_bne then
 					ALUsrc1 <= '0';
 					ALUsrc2 <= '0';
+					ALUop   <= alu_sub; 
 				end if;
 				
 				if OP = c_beq then

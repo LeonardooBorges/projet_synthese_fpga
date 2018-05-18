@@ -29,13 +29,13 @@ begin
 				else
 					aux_y := (others => '0');
 				end if;
-			when alu_and =>  aux_y := A and B;
-			when alu_or  =>  aux_y := A or B;
-			when alu_xor =>  aux_y := A xor B;
-			when alu_nor =>  aux_y := A nor B;
-			when "1001" =>  aux_y := TO_SIGNED(TO_INTEGER(A)*TO_INTEGER(B),32);                  -- bitwise NOR
-			when "1010" =>  aux_y := A/B;
-			when others => aux_y := A+B;
+			when alu_and  =>  aux_y := A and B;
+			when alu_or   =>  aux_y := A or B;
+			when alu_xor  =>  aux_y := A xor B;
+			when alu_nor  =>  aux_y := A nor B;
+			when alu_mult =>  aux_y := TO_SIGNED(TO_INTEGER(A)*TO_INTEGER(B),32);
+			when alu_div  =>  aux_y := TO_SIGNED(TO_INTEGER(A)/TO_INTEGER(B),32); 
+			when others   =>  aux_y := A + B;
 		end case;
 		if aux_y = 0 then 
 			Z <= '1';
