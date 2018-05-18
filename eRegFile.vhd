@@ -12,12 +12,21 @@ ENTITY eRegFile IS
 END ENTITY eRegFile;
 
 
+USE WORK.SpyOnMySigPkg.ALL;
 
 ARCHITECTURE aRegfile OF eRegFile IS
 TYPE regmem IS ARRAY (1 TO 31) OF STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL RegFile : regmem;
+SIGNAL RegFile : regmem := ((OTHERS => (OTHERS => '0')));
 
 BEGIN
+
+	PROCESS (RegFile)    
+	BEGIN
+	FOR i IN 1 TO 31 LOOP            
+		GlobalRegFile(i) <= RegFile(i);
+	END LOOP;
+	END PROCESS;
+	
 	PROCESS (clk)
 	BEGIN
 	IF rising_edge(clk) THEN

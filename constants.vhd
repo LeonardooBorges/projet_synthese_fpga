@@ -39,10 +39,10 @@ package constants is
 	constant c_ori   : std_logic_vector(5 downto 0) := "001101";
 	constant c_xori  : std_logic_vector(5 downto 0) := "001110";
 	
-	constant c_lb    : std_logic_vector(5 downto 0) := "011000";
-	constant c_lw    : std_logic_vector(5 downto 0) := "011011";
-	constant c_lbu   : std_logic_vector(5 downto 0) := "011100";
-	constant c_sb    : std_logic_vector(5 downto 0) := "100000";
-	constant c_sw    : std_logic_vector(5 downto 0) := "100011";
+	constant c_sb    : std_logic_vector(5 downto 0) := "101000";
+	constant c_sw    : std_logic_vector(5 downto 0) := "101011";
+	constant c_lbu   : std_logic_vector(5 downto 0) := "100100";
+	constant c_lb    : std_logic_vector(5 downto 0) := "100000";
+	constant c_lw    : std_logic_vector(5 downto 0) := "100011";
 	
 end constants;

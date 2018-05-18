@@ -3,29 +3,31 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 USE work.constants.all;
 
+USE WORK.SpyOnMySigPkg.ALL;
+
 entity control_sync is
 	port (
 		CLOCK    : in  std_logic;
 		RESET    : in  std_logic;
 		OP       : in  std_logic_vector(5 downto 0);  -- opcode
 		func     : in  std_logic_vector(5 downto 0);  -- func code
-		RegDst   : out std_logic;  -- Register destination
-		Jump     : out std_logic;
-		JumpR    : out std_logic;  -- Jump register
-		beq      : out std_logic;  -- Branch if equals
-		MemToReg : out std_logic;  -- Memory to register
-		ALUop    : out std_logic_vector(3 downto 0);  -- ALU op code
-		MemWrite : out std_logic;  -- Memory write
-		ALUsrc1  : out std_logic;
-		ALUsrc2  : out std_logic;
-		RegWrite : out std_logic;  -- Register write
-		bne      : out std_logic;  -- Branch if not equals
-		LoadBU   : out std_logic;  -- Load byte unsigned
-		LoadB    : out std_logic;  -- Load byte
-		storeB   : out std_logic;
-		JumpAL   : out std_logic;	-- Jump and link
-		PC_EN    : out std_logic;
-		current_state : out std_logic_vector(2 downto 0)
+		RegDst   : inout std_logic;  -- Register destination
+		Jump     : inout std_logic;
+		JumpR    : inout std_logic;  -- Jump register
+		beq      : inout std_logic;  -- Branch if equals
+		MemToReg : inout std_logic;  -- Memory to register
+		ALUop    : inout std_logic_vector(3 downto 0);  -- ALU op code
+		MemWrite : inout std_logic;  -- Memory write
+		ALUsrc1  : inout std_logic;
+		ALUsrc2  : inout std_logic;
+		RegWrite : inout std_logic;  -- Register write
+		bne      : inout std_logic;  -- Branch if not equals
+		LoadBU   : inout std_logic;  -- Load byte unsigned
+		LoadB    : inout std_logic;  -- Load byte
+		storeB   : inout std_logic;
+		JumpAL   : inout std_logic;	-- Jump and link
+		PC_EN    : inout std_logic;
+		current_state : inout std_logic_vector(2 downto 0)
 	);	
 end control_sync;
 
@@ -34,7 +36,31 @@ architecture arch of control_sync is
 	signal state : state_type;
 	
 begin
+
+--
+		gl_CLOCK  <= CLOCK ;
+		gl_RESET    <= RESET;
+		gl_OP      <= OP;
+		gl_func    <= func ;
+		gl_RegDst   <= RegDst;
+		gl_Jump     <= Jump;
+		gl_JumpR    <= JumpR  ;
+		gl_beq     <= beq  ;
+		gl_MemToReg <= MemToReg;
+		gl_ALUop    <= ALUop ;
+		gl_MemWrite <= MemWrite;
+		gl_ALUsrc1  <= ALUsrc1;
+		gl_ALUsrc2  <= ALUsrc2;
+		gl_RegWrite <=  RegWrite;
+		gl_bne      <= bne;
+		gl_LoadBU   <= LoadBU;
+		gl_LoadB    <= LoadB;
+		gl_storeB  <= storeB ;
+		gl_JumpAL   <= JumpAL;
+		gl_PC_EN    <= PC_EN ;
 	
+--
+
 	process(CLOCK, RESET)
 	begin
 		if RESET = '1' then
@@ -42,14 +68,12 @@ begin
 		elsif CLOCK'event and CLOCK = '1' then
 			case state is
 				when fetch => 
-					if OP = c_j or OP = c_jal then
-						state <= write_back;
-					else
-						state <= decode;
-					end if;
+					state <= decode;
 					
 				when decode =>
 					if OP = R_type and func = c_jr then
+						state <= write_back;
+					elsif OP = c_j or OP = c_jal then
 						state <= write_back;
 					else
 						state <= execute;
@@ -98,7 +122,7 @@ begin
 				
 				if OP = R_type or OP(5 downto 3) = op_imm then
 					RegWrite <= '1';
-					MemToReg <= '1';
+					MemToReg <= '0'; -- aqui nao é zero?
 					JumpAL   <= '0';
 					--RegDst   <= '1' when OP = R_type else '0';
 					if OP = R_type then 
@@ -153,7 +177,7 @@ begin
 					RegWrite <= '0';
 				end if;
 				
-				if OP = c_jr or OP = c_j or OP = c_jal then
+				if (OP = R_type and func = c_jr) or OP = c_j or OP = c_jal then	-- aqui nao é func = jr? isso causa um bug porque c_jr = c_addi
 					Jump <= '1';
 				elsif not (OP = c_beq or OP = c_bne) then
 					Jump <= '0';

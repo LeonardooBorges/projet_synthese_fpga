@@ -14,27 +14,28 @@ entity ALU is
 end ALU;
 
 architecture behavioral of ALU is
-signal aux_y : signed(31 downto 0);
 begin
-	process(A, B, OP) begin
+	process(A, B, OP) 
+	variable aux_y : signed(31 downto 0);
+	begin
 		case OP is  -- decode the opcode and perform the operation:
-			when alu_add =>  aux_y <= A + B;
-			when alu_sub =>  aux_y <= A - B;
-			when alu_srl =>  aux_y <= SHIFT_RIGHT(B, TO_INTEGER(A));
-			when alu_sll =>  aux_y <= SHIFT_LEFT(B, TO_INTEGER(A));
+			when alu_add =>  aux_y := A + B;
+			when alu_sub =>  aux_y := A - B;
+			when alu_srl =>  aux_y := SHIFT_RIGHT(B, TO_INTEGER(A));
+			when alu_sll =>  aux_y := SHIFT_LEFT(B, TO_INTEGER(A));
 			when alu_slt =>
 				if A < B then
-					aux_y <= x"00000001";
+					aux_y := x"00000001";
 				else
-					aux_y <= (others => '0');
+					aux_y := (others => '0');
 				end if;
-			when alu_and =>  aux_y <= A and B;
-			when alu_or  =>  aux_y <= A or B;
-			when alu_xor =>  aux_y <= A xor B;
-			when alu_nor =>  aux_y <= A nor B;
-			when "1001" =>  aux_y <= TO_SIGNED(TO_INTEGER(A)*TO_INTEGER(B),32);                  -- bitwise NOR
-			when "1010" =>  aux_y <= A/B;
-			when others => NULL;
+			when alu_and =>  aux_y := A and B;
+			when alu_or  =>  aux_y := A or B;
+			when alu_xor =>  aux_y := A xor B;
+			when alu_nor =>  aux_y := A nor B;
+			when "1001" =>  aux_y := TO_SIGNED(TO_INTEGER(A)*TO_INTEGER(B),32);                  -- bitwise NOR
+			when "1010" =>  aux_y := A/B;
+			when others => aux_y := A+B;
 		end case;
 		if aux_y = 0 then 
 			Z <= '1';
