@@ -1,41 +1,33 @@
 LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
-ENTITY eInstMem IS
-	PORT (
-		SIGNAL ReadAddr : IN STD_LOGIC_VECTOR (6 DOWNTO 0);
-		SIGNAL clk : IN STD_LOGIC;
-		SIGNAL Instruction31_0 : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
+entity eInstMem is
+	port (
+		signal ReadAddr : in std_logic_vector (6 downto 0);
+		signal clk : in std_logic;
+		signal Instruction31_0 : out std_logic_vector (31 downto 0)
 	);
-END ENTITY eInstMem;
+end entity eInstMem;
 
-USE WORK.SpyOnMySigPkg.ALL;
+use work.SpyOnMySigPkg.all;
 
-ARCHITECTURE aInstMem OF eInstMem IS
-TYPE instmem IS ARRAY (0 TO 31) OF STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL mem : instmem := ((("00100000000010000000000000000011"),("00100000000010010000000000000100"),("00100000000010100000000000000101"),("00100000000010110000000000000110"),("00010001111110000000000000000100"),("00100000000011000000000000000111"),("00100000000011010000000000001000"),("00100000000011100000000000001001"),("00100000000011110000000000001010"),("10100001001010110000000000001011"),("00100000000011010000000011111111"),("10100001001011010000000000001100"),others=> (others=>'0'))); --here we put the code that we want to execute
+architecture aInstMem of eInstMem is
+type instmem is array (0 TO 31) of std_logic_vector(31 downto 0);
+signal mem : instmem := ((("00100000000010000000000000000011"),others=> (others=>'0'))); --here we put the code that we want to execute
 
-
-
-
-
-
-
-
-
-BEGIN
-	PROCESS (mem)    
-	BEGIN
-	FOR i IN 0 TO 31 LOOP            
+begin
+	process (mem)    
+	begin
+	for i in 0 TO 31 LOOP            
 		Globalmem(i) <= mem(i);
-	END LOOP;
-	END PROCESS;
+	end LOOP;
+	end process;
 
-	PROCESS (clk)
-	BEGIN
-	IF rising_edge(clk) THEN
+	process (clk)
+	begin
+	if rising_edge(clk) then
 		Instruction31_0 <= mem(to_integer(unsigned(ReadAddr))/4);
-	END IF;
-	END PROCESS;
-END ARCHITECTURE aInstMem;
+	end if;
+	end process;
+end architecture aInstMem;

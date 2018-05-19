@@ -1,51 +1,51 @@
 LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
-ENTITY eBanch IS
-END ENTITY eBanch;
+entity eBanch is
+end entity eBanch;
 
-USE WORK.SpyOnMySigPkg.ALL;
+use work.SpyOnMySigPkg.all;
 
-ARCHITECTURE aBanch OF eBanch IS
+architecture aBanch of eBanch is
 
-SIGNAL observeRegFile : type_regmem;
-SIGNAL observemem : type_instmem;
-SIGNAL observememdata : type_mem32w;
-SIGNAL observePC : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL tb_clk, tb_rst : STD_LOGIC := '1';
+signal observeRegFile : type_regmem;
+signal observemem : type_instmem;
+signal observememdata : type_mem32w;
+signal observePC : std_logic_vector (31 downto 0);
+signal tb_clk, tb_rst : std_logic := '1';
 
 --
 
-SIGNAL		ob_CLOCK    :   std_logic;
-SIGNAL		ob_RESET    :   std_logic;
-SIGNAL		ob_OP       :  std_logic_vector(5 downto 0);  -- opcode
-SIGNAL		ob_func     : std_logic_vector(5 downto 0);  -- func code
-SIGNAL		ob_RegDst   :  std_logic;  -- Register destination
-SIGNAL		ob_Jump     :  std_logic;
-SIGNAL		ob_JumpR    :  std_logic;  -- Jump register
-SIGNAL		ob_beq      :  std_logic;  -- Branch if equals
-SIGNAL		ob_MemToReg :  std_logic;  -- Memory to register
-SIGNAL		ob_ALUop    : std_logic_vector(3 downto 0);  -- ALU op code
-SIGNAL		ob_MemWrite :  std_logic;  -- Memory write
-SIGNAL		ob_ALUsrc1  :  std_logic;
-SIGNAL		ob_ALUsrc2  :  std_logic;
-SIGNAL		ob_RegWrite :  std_logic;  -- Register write
-SIGNAL		ob_bne      : std_logic;  -- Branch if not equals
-SIGNAL		ob_LoadBU   :  std_logic;  -- Load byte unsigned
-SIGNAL		ob_LoadB    :  std_logic;  -- Load byte
-SIGNAL		ob_storeB   :  std_logic;
-SIGNAL		ob_JumpAL   :  std_logic;	-- Jump and link
-SIGNAL		ob_PC_EN    :  std_logic;
+signal		ob_CLOCK    :   std_logic;
+signal		ob_RESET    :   std_logic;
+signal		ob_OP       :  std_logic_vector(5 downto 0);  -- opcode
+signal		ob_func     : std_logic_vector(5 downto 0);  -- func code
+signal		ob_RegDst   :  std_logic;  -- Register destination
+signal		ob_Jump     :  std_logic;
+signal		ob_JumpR    :  std_logic;  -- Jump register
+signal		ob_beq      :  std_logic;  -- Branch if equals
+signal		ob_MemToReg :  std_logic;  -- Memory to register
+signal		ob_ALUop    : std_logic_vector(3 downto 0);  -- ALU op code
+signal		ob_MemWrite :  std_logic;  -- Memory write
+signal		ob_ALUsrc1  :  std_logic;
+signal		ob_ALUsrc2  :  std_logic;
+signal		ob_RegWrite :  std_logic;  -- Register write
+signal		ob_bne      : std_logic;  -- Branch if not equals
+signal		ob_LoadBU   :  std_logic;  -- Load byte unsigned
+signal		ob_LoadB    :  std_logic;  -- Load byte
+signal		ob_storeB   :  std_logic;
+signal		ob_JumpAL   :  std_logic;	-- Jump and link
+signal		ob_PC_EN    :  std_logic;
 --
 
-COMPONENT eMicroprocessor IS
-	PORT (
-		SIGNAL micro_clk, control_rst, regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC
+component eMicroprocessor is
+	port (
+		signal micro_clk, control_rst, regfile_rst, pc_rst, memdata_rst : in std_logic
 	);
-END COMPONENT;
+end component;
 	
-BEGIN
+begin
 --
 
 		ob_CLOCK    <= gl_CLOCK;
@@ -75,41 +75,41 @@ BEGIN
 		'0' after 0.5 ns when tb_clk = '1';
 
 	instMicroprocessor : eMicroprocessor
-		PORT MAP(micro_clk => tb_clk, control_rst => tb_rst,
+		port map(micro_clk => tb_clk, control_rst => tb_rst,
 		regfile_rst => tb_rst, pc_rst => tb_rst, memdata_rst => tb_rst);
 
-	PROCESS (GlobalRegFile)    
-	BEGIN
-		FOR i IN 1 TO 31 LOOP            
+	process (GlobalRegFile)    
+	begin
+		for i in 1 TO 31 loop            
 			observeRegFile(i) <= GlobalRegFile(i);
-		END LOOP;
-	END PROCESS;
+		end loop;
+	end process;
 	
-	PROCESS (GlobalPC)    
-	BEGIN        
+	process (GlobalPC)    
+	begin        
 		observePC <= GlobalPC;
-	END PROCESS;
+	end process;
 	
-	PROCESS (Globalmem)    
-	BEGIN
-   FOR i IN 0 TO 31 LOOP            
+	process (Globalmem)    
+	begin
+   for i in 0 TO 31 loop            
         observemem(i) <= Globalmem(i);
-   END LOOP;
-	END PROCESS;
+   end loop;
+	end process;
 	
-	PROCESS (Globalmemdata)    
-	BEGIN
-   FOR i IN 0 TO 31 LOOP            
+	process (Globalmemdata)    
+	begin
+   for i in 0 TO 31 loop            
         observememdata(i) <= Globalmemdata(i);
-   END LOOP;
-	END PROCESS;
+   end loop;
+	end process;
 	
-	PROCESS BEGIN
-		WAIT FOR 3 ns;
+	process begin
+		wait for 3 ns;
 		tb_rst <= '0';
-		WAIT FOR 50 ns;
+		wait for 50 ns;
 		tb_rst <= '1';
-	END PROCESS;
+	end process;
 	
 	
-END ARCHITECTURE aBanch;
+end architecture aBanch;

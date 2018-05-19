@@ -1,7 +1,7 @@
 OPcode = {'sll':'000000','srl':'000000','jr':'000000',
         'add':'000000','sub':'000000','and':'000000',
         'or':'000000','nor':'000000','slt':'000000',
-        'mult':'000000','div':'000000',
+        'mult':'000000','div':'000000','xor':'000000',
         'j':'000010','jal':'000011','beq':'000100',
         'bne':'000101','addi':'001000','slti':'001010',
         'andi':'001100','ori':'001101','xori':'001110',
@@ -12,7 +12,7 @@ OPcode = {'sll':'000000','srl':'000000','jr':'000000',
 Funct = {'sll':'000000','srl':'000010','jr':'001000',
         'add':'100000','sub':'100010','and':'100100',
         'or':'100101','nor':'100111','slt':'101010',
-        'mult':'011000','div':'011010'
+        'mult':'011000','div':'011010','xor':'100110'
         }
 
 Registers = {'$zero':0,'$at':1,'$v0':2,'$v1':3,'$a0':4,
@@ -27,7 +27,7 @@ Registers = {'$zero':0,'$at':1,'$v0':2,'$v1':3,'$a0':4,
 for r in Registers:
     Registers[r] = '{0:05b}'.format(Registers[r])
 
-TypeR=['sll','srl','jr','add','sub','and','or','nor','slt','mult','div']
+TypeR=['sll','srl','jr','add','sub','and','or','nor','slt','mult','div','xor']
 TypeI=['beq','bne','addi','slti','andi','ori',
         'xori','lb','lw','lbu','sw','sb']
 TypeJ=['j','jal']

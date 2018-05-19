@@ -1,60 +1,60 @@
 LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
-ENTITY eDatapath IS
-	PORT (
-			SIGNAL Jmp, JmpR, BEQ, BNEQ, RegDst, Jmpal, RegWrite, MemWrite : IN STD_LOGIC;
-			SIGNAL clk, AluSrc1, AluSrc2, loadb, loadbu, MemtoReg, storeb, pc_en : IN STD_LOGIC;
-			SIGNAL regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC;
-			SIGNAL AluOP : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-			SIGNAL OPcode, funct : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
+entity eDatapath is
+	port (
+			signal Jmp, JmpR, BEQ, BNEQ, RegDst, Jmpal, RegWrite, MemWrite : in std_logic;
+			signal clk, AluSrc1, AluSrc2, loadb, loadbu, MemtoReg, storeb, pc_en : in std_logic;
+			signal regfile_rst, pc_rst, memdata_rst : in std_logic;
+			signal AluOP : in std_logic_vector (3 downto 0);
+			signal OPcode, funct : out std_logic_vector (5 downto 0)
 	);
-END ENTITY eDatapath;
+end entity eDatapath;
 
-USE WORK.SpyOnMySigPkg.ALL;
+use work.SpyOnMySigPkg.all;
 
-ARCHITECTURE aDatapath OF eDatapath IS
-SIGNAL RegFile_WriteData, RegFile_ReadData1 : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL RegFile_ReadAddr1, RegFile_ReadAddr2 : STD_LOGIC_VECTOR (4 DOWNTO 0);
-SIGNAL RegFile_WriteAddr : STD_LOGIC_VECTOR (4 DOWNTO 0);
-SIGNAL Mem_Address, InstMem_ReadAddr : STD_LOGIC_VECTOR (6 DOWNTO 0);
-SIGNAL Mem_WriteData, Mem_ReadData, RegFile_ReadData2 : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL ALU_A, ALU_B, ALU_Y : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL ALU_OP : STD_LOGIC_VECTOR (3 DOWNTO 0);
-SIGNAL ALU_Z : STD_LOGIC;
-SIGNAL PC : STD_LOGIC_VECTOR (31 DOWNTO 0) := (others => '0');
-SIGNAL PCplus4 : STD_LOGIC_VECTOR (31 DOWNTO 0) := x"00000004";
-SIGNAL InstMem_Instruction31_0 : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL RegFiletmp_ReadAddr1, RegFiletmp_ReadAddr2, RegFiletmp_WriteAddr : INTEGER RANGE 0 TO 31;
+architecture aDatapath of eDatapath is
+signal RegFile_WriteData, RegFile_ReadData1 : std_logic_vector (31 downto 0);
+signal RegFile_ReadAddr1, RegFile_ReadAddr2 : std_logic_vector (4 downto 0);
+signal RegFile_WriteAddr : std_logic_vector (4 downto 0);
+signal Mem_Address, InstMem_ReadAddr : std_logic_vector (6 downto 0);
+signal Mem_WriteData, Mem_ReadData, RegFile_ReadData2 : std_logic_vector (31 downto 0);
+signal ALU_A, ALU_B, ALU_Y : std_logic_vector (31 downto 0);
+signal ALU_OP : std_logic_vector (3 downto 0);
+signal ALU_Z : std_logic;
+signal PC : std_logic_vector (31 downto 0) := (others => '0');
+signal PCplus4 : std_logic_vector (31 downto 0) := x"00000004";
+signal InstMem_Instruction31_0 : std_logic_vector (31 downto 0);
+signal RegFiletmp_ReadAddr1, RegFiletmp_ReadAddr2, RegFiletmp_WriteAddr : INTEGER range 0 TO 31;
 
-COMPONENT eInstMem 	
-	PORT (
-		SIGNAL ReadAddr : IN STD_LOGIC_VECTOR (6 DOWNTO 0);
-		SIGNAL clk : IN STD_LOGIC;
-		SIGNAL Instruction31_0 : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
+component eInstMem 	
+	port (
+		signal ReadAddr : in std_logic_vector (6 downto 0);
+		signal clk : in std_logic;
+		signal Instruction31_0 : out std_logic_vector (31 downto 0)
 	);
-END COMPONENT;
+end component;
 	
-COMPONENT eRegFile
-	PORT (
-		SIGNAL ReadAddr1, ReadAddr2, WriteAddr : IN INTEGER RANGE 0 TO 31;
-		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, RegWrite, regfile_rst : IN STD_LOGIC;
-		SIGNAL ReadData1, ReadData2 : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
+component eRegFile
+	port (
+		signal ReadAddr1, ReadAddr2, WriteAddr : in INTEGER range 0 TO 31;
+		signal WriteData : in std_logic_vector (31 downto 0);
+		signal clk, RegWrite, regfile_rst : in std_logic;
+		signal ReadData1, ReadData2 : out std_logic_vector (31 downto 0)
 	);
-END COMPONENT;
+end component;
 
-COMPONENT eMem
-	PORT (
-		SIGNAL Address : IN STD_LOGIC_VECTOR (6 DOWNTO 0);
-		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, MemWrite, loadb, loadbu, storeb, memdata_rst : IN STD_LOGIC;
-		SIGNAL ReadData : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
+component eMem
+	port (
+		signal Address : in std_logic_vector (6 downto 0);
+		signal WriteData : in std_logic_vector (31 downto 0);
+		signal clk, MemWrite, loadb, loadbu, storeb, memdata_rst : in std_logic;
+		signal ReadData : out std_logic_vector (31 downto 0)
 	);
-END COMPONENT;
+end component;
 
-COMPONENT ALU
+component ALU
 	port (
 		A  : in  signed(31 downto 0);   -- operand A
 		B  : in  signed(31 downto 0);   -- operand B
@@ -62,73 +62,74 @@ COMPONENT ALU
 		Y  : out signed(31 downto 0);  -- operation result
 		Z  : out std_logic -- zero
 	);	
-END COMPONENT;
+end component;
 
-BEGIN
+begin
 
-PROCESS (PC) BEGIN
+process (PC) begin
 	GlobalPC <= PC;
-END PROCESS;
+end process;
 
 RegFiletmp_ReadAddr1 <= to_integer(unsigned(RegFile_ReadAddr1));
 RegFiletmp_ReadAddr2 <= to_integer(unsigned(RegFile_ReadAddr2));
 RegFiletmp_WriteAddr <= to_integer(unsigned(RegFile_WriteAddr));
 InstMem : eInstMem
-PORT MAP(clk => clk, ReadAddr => InstMem_ReadAddr, Instruction31_0 => InstMem_Instruction31_0);
+port map(clk => clk, ReadAddr => InstMem_ReadAddr, Instruction31_0 => InstMem_Instruction31_0);
 RegFile : eRegFile
-PORT MAP(ReadAddr1 => RegFiletmp_ReadAddr1, regfile_rst => regfile_rst,
+port map(ReadAddr1 => RegFiletmp_ReadAddr1, regfile_rst => regfile_rst,
 	ReadAddr2 => RegFiletmp_ReadAddr2, clk => clk,
 	WriteAddr => RegFiletmp_WriteAddr, WriteData => RegFile_WriteData,
 	ReadData1 => RegFile_ReadData1, ReadData2 => RegFile_ReadData2, RegWrite => RegWrite);
 Mem : eMem
-PORT MAP(Address => Mem_Address, WriteData => Mem_WriteData, ReadData => Mem_ReadData, memdata_rst => memdata_rst,
+port map(Address => Mem_Address, WriteData => Mem_WriteData, ReadData => Mem_ReadData, memdata_rst => memdata_rst,
 	clk => clk, MemWrite => MemWrite, loadb => loadb, loadbu => loadbu, storeb => storeb);
 cALU : ALU
-PORT MAP(A => signed(ALU_A), B => signed(ALU_B), std_logic_vector(Y) => ALU_Y,
+port map(A => signed(ALU_A), B => signed(ALU_B), std_logic_vector(Y) => ALU_Y,
 OP => ALU_OP, Z => ALU_Z);
+ALU_OP <= AluOP;
 
-RegFile_ReadAddr1 <= InstMem_Instruction31_0(25 DOWNTO 21);
-RegFile_ReadAddr2 <= InstMem_Instruction31_0(20 DOWNTO 16);
-RegFile_WriteAddr <= "11111" WHEN Jmpal='1' ELSE
-							InstMem_Instruction31_0(15 DOWNTO 11) WHEN RegDst='1' ELSE
-							InstMem_Instruction31_0(20 DOWNTO 16);
-RegFile_WriteData <= PCplus4 WHEN Jmpal='1' ELSE
-	Mem_ReadData WHEN MemtoReg='1' ELSE
+RegFile_ReadAddr1 <= InstMem_Instruction31_0(25 downto 21);
+RegFile_ReadAddr2 <= InstMem_Instruction31_0(20 downto 16);
+RegFile_WriteAddr <= "11111" when Jmpal='1' else
+							InstMem_Instruction31_0(15 downto 11) when RegDst='1' else
+							InstMem_Instruction31_0(20 downto 16);
+RegFile_WriteData <= PCplus4 when Jmpal='1' else
+	Mem_ReadData when MemtoReg='1' else
 	ALU_Y;
 							
-ALU_A <= (31 DOWNTO 5 => InstMem_Instruction31_0(10)) & InstMem_Instruction31_0(10 DOWNTO 6) WHEN AluSrc1='1' ELSE
+ALU_A <= (31 downto 5 => InstMem_Instruction31_0(10)) & InstMem_Instruction31_0(10 downto 6) when AluSrc1='1' else
 	RegFile_ReadData1;
-ALU_B <= (31 DOWNTO 16 => InstMem_Instruction31_0(15)) & InstMem_Instruction31_0(15 DOWNTO 0) WHEN AluSrc2='1' ELSE
+ALU_B <= (31 downto 16 => InstMem_Instruction31_0(15)) & InstMem_Instruction31_0(15 downto 0) when AluSrc2='1' else
 	RegFile_ReadData2;
 
-Mem_Address <= ALU_Y(6 DOWNTO 0);
+Mem_Address <= ALU_Y(6 downto 0);
 Mem_WriteData <= RegFile_ReadData2;
 
-PROCESS (clk, pc_rst)
-	VARIABLE tmp : STD_LOGIC_VECTOR (31 DOWNTO 0);
-	BEGIN
-	IF pc_rst = '1' THEN
+process (clk, pc_rst)
+	variable tmp : std_logic_vector (31 downto 0);
+	begin
+	if pc_rst = '1' then
 		PC <= x"00000000";
-	ELSIF rising_edge(clk) THEN
-		IF pc_en='1' THEN
-			IF Jmp='1' AND JmpR='1' THEN
+	elsif rising_edge(clk) then
+		if pc_en='1' then
+			if Jmp='1' and JmpR='1' then
 				PC <= ALU_Y;
-			ELSIF Jmp='1' THEN
-				PC <= PCplus4(31 DOWNTO 28) & InstMem_Instruction31_0(25 DOWNTO 0) & "00";
-			ELSIF ((BNEQ AND NOT ALU_Z) OR (BEQ AND ALU_Z))='1' THEN
-				tmp := (31 DOWNTO 18 => InstMem_Instruction31_0(15)) & InstMem_Instruction31_0(15 DOWNTO 0) & "00";
-				PC <= STD_LOGIC_VECTOR( signed(tmp) + signed(PCplus4) );
-			ELSE
+			elsif Jmp='1' then
+				PC <= PCplus4(31 downto 28) & InstMem_Instruction31_0(25 downto 0) & "00";
+			elsif ((BNEQ and not ALU_Z) or (BEQ and ALU_Z))='1' then
+				tmp := (31 downto 18 => InstMem_Instruction31_0(15)) & InstMem_Instruction31_0(15 downto 0) & "00";
+				PC <= std_logic_vector( signed(tmp) + signed(PCplus4) );
+			else
 				PC <= PCplus4;
-			END IF;
-		ELSIF pc_en='0' THEN
+			end if;
+		elsif pc_en='0' then
 		PC <= PC;
-		END IF;
-		PCplus4 <= STD_LOGIC_VECTOR(unsigned(PC)+4);
-	END IF;
-	END PROCESS;
-	OPcode <= InstMem_Instruction31_0(31 DOWNTO 26);
-	funct <=  InstMem_Instruction31_0(5 DOWNTO 0);
-	InstMem_ReadAddr <= PC(6 DOWNTO 0);
+		end if;
+		PCplus4 <= std_logic_vector(unsigned(PC)+4);
+	end if;
+	end process;
+	OPcode <= InstMem_Instruction31_0(31 downto 26);
+	funct <=  InstMem_Instruction31_0(5 downto 0);
+	InstMem_ReadAddr <= PC(6 downto 0);
 	
-END ARCHITECTURE aDatapath;
+end architecture aDatapath;

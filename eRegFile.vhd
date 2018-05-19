@@ -1,52 +1,52 @@
 LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
-ENTITY eRegFile IS
-	PORT (
-		SIGNAL ReadAddr1, ReadAddr2, WriteAddr : IN INTEGER RANGE 0 TO 31;
-		SIGNAL WriteData : IN STD_LOGIC_VECTOR (31 DOWNTO 0);
-		SIGNAL clk, RegWrite, regfile_rst : IN STD_LOGIC;
-		SIGNAL ReadData1, ReadData2 : OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
+ENTITY eRegFile is
+	port (
+		signal ReadAddr1, ReadAddr2, WriteAddr : in INTEGER range 0 TO 31;
+		signal WriteData : in std_logic_vector (31 downto 0);
+		signal clk, RegWrite, regfile_rst : in std_logic;
+		signal ReadData1, ReadData2 : out std_logic_vector (31 downto 0)
 	);
-END ENTITY eRegFile;
+end ENTITY eRegFile;
 
 
-USE WORK.SpyOnMySigPkg.ALL;
+use work.SpyOnMySigPkg.all;
 
-ARCHITECTURE aRegfile OF eRegFile IS
-TYPE regmem IS ARRAY (1 TO 31) OF STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL RegFile : regmem := ((OTHERS => (OTHERS => '0')));
+architecture aRegfile of eRegFile is
+type regmem is array (1 TO 31) of std_logic_vector(31 downto 0);
+signal RegFile : regmem := ((others => (others => '0')));
 
-BEGIN
+begin
 
-	PROCESS (RegFile)    
-	BEGIN
-	FOR i IN 1 TO 31 LOOP            
+	process (RegFile)    
+	begin
+	for i in 1 TO 31 LOOP            
 		GlobalRegFile(i) <= RegFile(i);
-	END LOOP;
-	END PROCESS;
+	end LOOP;
+	end process;
 	
-	PROCESS (clk, regfile_rst)
-	BEGIN
-	IF regfile_rst = '1' THEN
-		RegFile <= ((OTHERS => (OTHERS => '0')));
-	ELSIF rising_edge(clk) THEN
-		IF ReadAddr1=0 THEN
+	process (clk, regfile_rst)
+	begin
+	IF regfile_rst = '1' then
+		RegFile <= ((others => (others => '0')));
+	elsif rising_edge(clk) then
+		IF ReadAddr1=0 then
 			ReadData1 <= x"00000000";
-		ELSE
+		else
 			ReadData1 <= RegFile(ReadAddr1);
-		END IF;
+		end IF;
 		
-		IF ReadAddr2=0 THEN
+		IF ReadAddr2=0 then
 			ReadData2 <= x"00000000";
-		ELSE
+		else
 			ReadData2 <= RegFile(ReadAddr2);
-		END IF;
+		end IF;
 		
-		IF RegWrite='1' AND WriteAddr/=0 THEN
+		IF RegWrite='1' and WriteAddr/=0 then
 			RegFile(WriteAddr) <= WriteData;
-		END IF;
-	END IF;
-	END PROCESS;
-END ARCHITECTURE aRegFile;
+		end IF;
+	end IF;
+	end process;
+end architecture aRegFile;

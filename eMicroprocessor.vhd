@@ -1,25 +1,25 @@
 LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 
-ENTITY eMicroprocessor IS
-	PORT (
-		SIGNAL micro_clk, control_rst, regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC
+entity eMicroprocessor is
+	port (
+		signal micro_clk, control_rst, regfile_rst, pc_rst, memdata_rst : in std_logic
 	);
-END ENTITY eMicroprocessor;
+end entity eMicroprocessor;
 
-ARCHITECTURE aMicroprocessor OF eMicroprocessor IS
-	COMPONENT eDatapath IS
-	PORT (
-			SIGNAL Jmp, JmpR, BEQ, BNEQ, RegDst, Jmpal, RegWrite, MemWrite : IN STD_LOGIC;
-			SIGNAL clk, AluSrc1, AluSrc2, loadb, loadbu, MemtoReg, storeb, pc_en : IN STD_LOGIC;
-			SIGNAL regfile_rst, pc_rst, memdata_rst : IN STD_LOGIC;
-			SIGNAL AluOP : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
-			SIGNAL OPcode, funct : OUT STD_LOGIC_VECTOR (5 DOWNTO 0)
+architecture aMicroprocessor of eMicroprocessor is
+	component eDatapath is
+	port (
+			signal Jmp, JmpR, BEQ, BNEQ, RegDst, Jmpal, RegWrite, MemWrite : in std_logic;
+			signal clk, AluSrc1, AluSrc2, loadb, loadbu, MemtoReg, storeb, pc_en : in std_logic;
+			signal regfile_rst, pc_rst, memdata_rst : in std_logic;
+			signal AluOP : in std_logic_vector (3 downto 0);
+			signal OPcode, funct : out std_logic_vector (5 downto 0)
 	);
-	END COMPONENT eDatapath;
+	end component eDatapath;
 	
-	COMPONENT control_sync IS
+	component control_sync is
 	port (
 		CLOCK    : in  std_logic;
 		RESET    : in  std_logic;
@@ -43,17 +43,17 @@ ARCHITECTURE aMicroprocessor OF eMicroprocessor IS
 		PC_EN    : inout std_logic;
 		current_state : out std_logic_vector(2 downto 0)
 	);	
-	END COMPONENT control_sync;
+	end component control_sync;
 	
-	SIGNAL micro_Jmp, micro_JmpR, micro_BEQ, micro_BNEQ, micro_RegDst, micro_Jmpal : STD_LOGIC;
-	SIGNAL micro_AluSrc1, micro_AluSrc2, micro_loadb, micro_loadbu : STD_LOGIC;
-	SIGNAL micro_MemtoReg, micro_storeb, micro_pc_en, micro_RegWrite, micro_MemWrite : STD_LOGIC;
-	SIGNAL micro_AluOP :  STD_LOGIC_VECTOR (3 DOWNTO 0);
-	SIGNAL micro_OPcode, micro_funct :  STD_LOGIC_VECTOR (5 DOWNTO 0);
+	signal micro_Jmp, micro_JmpR, micro_BEQ, micro_BNEQ, micro_RegDst, micro_Jmpal : std_logic;
+	signal micro_AluSrc1, micro_AluSrc2, micro_loadb, micro_loadbu : std_logic;
+	signal micro_MemtoReg, micro_storeb, micro_pc_en, micro_RegWrite, micro_MemWrite : std_logic;
+	signal micro_AluOP :  std_logic_vector (3 downto 0);
+	signal micro_OPcode, micro_funct :  std_logic_vector (5 downto 0);
 	
-	BEGIN
+	begin
 	instDapath : eDatapath
-	PORT MAP(Jmp => micro_Jmp, JmpR => micro_JmpR, BEQ => micro_BEQ, BNEQ => micro_BNEQ, 
+	port map(Jmp => micro_Jmp, JmpR => micro_JmpR, BEQ => micro_BEQ, BNEQ => micro_BNEQ, 
 		RegDst => micro_RegDst, Jmpal => micro_Jmpal, RegWrite => micro_RegWrite, MemWrite => micro_MemWrite,
 		clk => micro_clk, AluSrc1 => micro_AluSrc1, AluSrc2 => micro_AluSrc2, OPcode => micro_OPcode,
 		loadb => micro_loadb, loadbu => micro_loadbu, MemtoReg => micro_MemtoReg, funct => micro_funct,
@@ -61,7 +61,7 @@ ARCHITECTURE aMicroprocessor OF eMicroprocessor IS
 		regfile_rst => regfile_rst, pc_rst => pc_rst, memdata_rst => memdata_rst);
 	
 	instControl : control_sync
-	PORT MAP(
+	port map(
 	CLOCK => micro_clk,RESET => control_rst,OP => micro_OPcode,func => micro_funct,RegDst => micro_RegDst,
 	beq => micro_BEQ, MemToReg => micro_MemtoReg, ALUop => micro_AluOP, MemWrite => micro_MemWrite,
 	ALUsrc2 => micro_AluSrc2,RegWrite => micro_RegWrite,bne => micro_BNEQ,LoadBU => micro_loadbu,
@@ -70,4 +70,4 @@ ARCHITECTURE aMicroprocessor OF eMicroprocessor IS
 	
 	
 	
-END ARCHITECTURE aMicroprocessor;
+end architecture aMicroprocessor;
