@@ -1,2 +1,17 @@
 #Ignores libreoffice temporary files
 .~*
+*.bak
+*.cdb
+*.hdb
+*.flock
+*.tmw_info
+*.rpt
+*.do
+*.ini
+*.wlf
+*.vwf
+*.qdb
+*.qpg
+*.qtl
+
+

@@ -1,7 +1,8 @@
 LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 USE work.constants.all;
+USE work.functions_pack.all;
 
 USE WORK.SpyOnMySigPkg.ALL;
 
