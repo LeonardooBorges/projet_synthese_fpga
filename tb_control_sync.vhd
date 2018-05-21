@@ -114,10 +114,14 @@ begin
 		procedure check_code(constant test_identifier : in String;
 									constant op_in : in std_logic_vector(5 downto 0);
 									constant func_in : in std_logic_vector(5 downto 0);
-									constant res_execute : in std_logic_vector(10 downto 0);
-									constant res_write_back : in std_logic_vector(9 downto 0)) is
-			variable res8 : std_logic_vector(10 downto 0);
-			variable res6 : std_logic_vector(9 downto 0);
+									constant expected_execute : in std_logic_vector(10 downto 0);
+									constant expected_memory : in std_logic_vector(5 downto 0);
+									constant expected_write_back : in std_logic_vector(9 downto 0);
+									constant thereIsExecuteState : in boolean;
+									constant thereIsMemoryState  : in boolean) is
+			variable observerd_execute : std_logic_vector(10 downto 0);
+			variable observed_memory  : std_logic_vector(5 downto 0);
+			variable observed_write_back : std_logic_vector(9 downto 0);
 		begin
 		
 			-- Assign values to circuit inputs
@@ -139,19 +143,33 @@ begin
 			wait until rising_edge(CLOCK);
 			wait for CLK_PERIOD/4;
 			
-			res8 := PC_EN & MemWrite & RegWrite & ALUsrc1 & ALUsrc2 & MemToReg & RegDst & JumpAL & LoadB & LoadBU & storeB;
-			assert match_assert(res_execute, res8)
-			report "Test " & test_identifier & "- error execute " & integer'image(to_integer(unsigned(current_state))) & lf &
-					 "   " & to_string(res_execute) & " = " & to_string(res8)
-			severity error;
 			
-			wait until rising_edge(CLOCK);
-			wait for CLK_PERIOD/4;
+			if thereIsExecuteState then
+				observerd_execute := PC_EN & MemWrite & RegWrite & ALUsrc1 & ALUsrc2 & MemToReg & RegDst & JumpAL & LoadB & LoadBU & storeB;
+				assert match_assert(expected_execute, observerd_execute)
+				report "Test " & test_identifier & " - error execute " & integer'image(to_integer(unsigned(current_state))) & lf &
+						 "   " & to_string(expected_execute) & " = " & to_string(observerd_execute)
+				severity error;
+				
+				wait until rising_edge(CLOCK);
+				wait for CLK_PERIOD/4;
+			end if;
+			
+			if thereIsMemoryState then
+				observed_memory := PC_EN & MemWrite & RegWrite & MemToReg & RegDst & JumpAL;
+				assert match_assert(expected_memory, observed_memory)
+				report "Test " & test_identifier & " - error memory " & integer'image(to_integer(unsigned(current_state))) & lf &
+					 "   " & to_string(expected_memory)  & " = " & to_string(observed_memory)
+				severity error;
+			
+				wait until rising_edge(CLOCK);
+				wait for CLK_PERIOD/4;
+			end if;
 		
-			res6 := PC_EN & MemWrite & RegWrite & Jump & beq & bne & ALUsrc1 & ALUsrc2 & JumpAL & JumpR;
-			assert match_assert(res_write_back, res6)
+			observed_write_back := PC_EN & MemWrite & RegWrite & Jump & beq & bne & ALUsrc1 & ALUsrc2 & JumpAL & JumpR;
+			assert match_assert(expected_write_back, observed_write_back)
 			report "Test " & test_identifier & " - error write_back " & integer'image(to_integer(unsigned(current_state))) & lf &
-					 "   " & to_string(res_write_back)  & " = " & to_string(res6)
+					 "   " & to_string(expected_write_back)  & " = " & to_string(observed_write_back)
 			severity error;
 			
 			wait until rising_edge(CLOCK);
@@ -162,29 +180,44 @@ begin
 	begin
 		
 		-- execute order    : PC_EN & MemWrite & RegWrite & ALUsrc1 & ALUsrc2 & MemToReg & RegDst & JumpAL & LoadB & LoadBU & storeB;
+		-- memory order     : PC_EN & MemWrite & RegWrite & MemToReg & RegDst & JumpAL;
 		-- write back order : PC_EN & MemWrite & RegWrite & Jump & beq & bne & ALUsrc1 & ALUsrc2 & JumpAL & JumpR;
 		
-		async_reset;		
-		check_code("Multiplication",      R_type, c_mult, "00100010---", "100000----");
-		check_code("Division",            R_type, c_div,  "00100010---", "100000----");
-		check_code("Sum",                 R_type, c_add,  "00100010---", "100000----");
-		check_code("Subtraction",         R_type, c_sub,  "00100010---", "100000----");
-		check_code("And bitwise",         R_type, c_and,  "00100010---", "100000----");
-		check_code("Or bitwise",          R_type, c_or,   "00100010---", "100000----");
-		check_code("Xor bitwise",         R_type, c_xor,  "00100010---", "100000----");
-		check_code("Nor bitwise",         R_type, c_nor,  "00100010---", "100000----");
-		check_code("Set less than",       R_type, c_slt,  "00100010---", "100000----");
+		async_reset;
+      --check_code(Identifier, OP, func, expected_execute, expected_memory, expected_write_back, thereIsExecuteState, thereIsMemoryState)		
+		check_code("Multiplication",      R_type, c_mult,    "00100010---", "------", "100000----", true,  false);
+		check_code("Division",            R_type, c_div,     "00100010---", "------", "100000----", true,  false);
+		check_code("Sum",                 R_type, c_add,     "00100010---", "------", "100000----", true,  false);
+		check_code("Subtraction",         R_type, c_sub,     "00100010---", "------", "100000----", true,  false);
+		check_code("And bitwise",         R_type, c_and,     "00100010---", "------", "100000----", true,  false);
+		check_code("Or bitwise",          R_type, c_or,      "00100010---", "------", "100000----", true,  false);
+		check_code("Xor bitwise",         R_type, c_xor,     "00100010---", "------", "100000----", true,  false);
+		check_code("Nor bitwise",         R_type, c_nor,     "00100010---", "------", "100000----", true,  false);
+		check_code("Set less than",       R_type, c_slt,     "00100010---", "------", "100000----", true,  false);
 		
-		check_code("Shift left logical",  R_type, c_sll,  "00110010---", "100000----");
-		check_code("Shift right logical", R_type, c_srl,  "00110010---", "100000----");
+		check_code("Shift left logical",  R_type, c_sll,     "00110010---", "------", "100000----", true,  false);
+		check_code("Shift right logical", R_type, c_srl,     "00110010---", "------", "100000----", true,  false);
+	
+		check_code("Sum imm",             c_addi, "------",  "00101000---", "------", "100000----", true,  false);
+		check_code("Set less than imm",   c_slti, "------",  "00101000---", "------", "100000----", true,  false);
+		check_code("And bitwise imm",     c_andi, "------",  "00101000---", "------", "100000----", true,  false);
+		check_code("Or bitwise imm",      c_ori,  "------",  "00101000---", "------", "100000----", true,  false);
+		check_code("Xor bitwise imm",     c_xori, "------",  "00101000---", "------", "100000----", true,  false);
+	
 		
+		check_code("Branch equals",       c_beq,  "------",  "000--------", "------", "100-1000--", true,  false);
+		check_code("Branch not equals",   c_bne,  "------",  "000--------", "------", "100-0100--", true,  false);
 		
-		check_code("Branch equals",       c_beq,  "------",  "000--------", "100-1000--");
-		check_code("Branch not equals",   c_bne,  "------",  "000--------", "100-0100--");
+		check_code("Store word",          c_sw,   "------",  "01001------", "------", "100000----", true,  false);
+		check_code("Store byte",          c_sb,   "------",  "01001-----1", "------", "100000----", true,  false);
 		
-		check_code("Store word",          c_sw,   "------",   "01001------", "100000----");
-		check_code("Store byte",          c_sb,   "------",   "01001-----1", "100000----");
+		check_code("Jump register",       R_type, c_jr,      "-----------", "------", "1001--00-1", false, false);
+		check_code("Jump",                c_j,    "------",  "-----------", "------", "1001-----0", false, false);
+		check_code("Jump and link",       c_jal,  "------",  "-----------", "------", "1011----10", false, false);
 		
+		check_code("Load word",           c_lw,   "------",  "00001------", "001100", "100000----", true,   true);
+		check_code("Load byte",           c_lb,   "------",  "00001---1--", "001100", "100000----", true,   true);
+		check_code("Load byte unsigned",  c_lbu,  "------",  "00001---11-", "001100", "100000----", true,   true);
 		
 		sim_finished <= true;
 		wait;
