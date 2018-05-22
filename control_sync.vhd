@@ -174,7 +174,7 @@ begin
 					ALUop <= alu_div;
 				elsif OP = R_type and func = c_sub then
 					ALUop <= alu_sub;
-				elsif (OP = R_type and func = c_and) or OP = c_addi then
+				elsif (OP = R_type and func = c_and) or OP = c_andi then
 					ALUop <= alu_and;
 				elsif (OP = R_type and func = c_or) or OP = c_ori then
 					ALUop <= alu_or;
