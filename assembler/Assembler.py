@@ -1,3 +1,5 @@
+from bitstring import Bits
+
 OPcode = {'sll':'000000','srl':'000000','jr':'000000',
         'add':'000000','sub':'000000','and':'000000',
         'or':'000000','nor':'000000','slt':'000000',
@@ -49,12 +51,16 @@ for line in code:
         addr += 1
 print(Labels)
 
+
+addr = 0
+
 for line in code:
     binary = ''
     tmp = line.split()
     if line and tmp[0] not in TypeR and tmp[0] not in TypeI and tmp[0] not in TypeJ:
         binary = binary
     elif line:
+        addr += 1
         binary += OPcode[tmp[0]]
         tmp1 = tmp[1].split(',')
         if tmp[0] in TypeR:
@@ -78,7 +84,7 @@ for line in code:
                 binary += Registers[tmp1[0]]
                 binary += Registers[tmp1[1]]
                 if tmp1[2] in Labels:
-                    binary += '{0:016b}'.format(Labels[tmp1[2]])
+                    binary += Bits(int=Labels[tmp1[2]]-addr,length=16).bin
                 else:
                     binary += '{0:016b}'.format(int(tmp1[2]))
             elif tmp[0] in ['addi','slti','andi','ori','xori']:
@@ -96,4 +102,3 @@ for line in code:
             else:
                 binary += '{0:026b}'.format(int(tmp1[0]))
         print(binary)
-

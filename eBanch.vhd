@@ -107,7 +107,7 @@ begin
 	process begin
 		wait for 3 ns;
 		tb_rst <= '0';
-		wait for 50 ns;
+		wait for 300 ns;
 		tb_rst <= '1';
 	end process;
 	
