@@ -4,8 +4,6 @@ use IEEE.NUMERIC_STD.all;
 USE work.constants.all;
 USE work.functions_pack.all;
 
-USE WORK.SpyOnMySigPkg.ALL;
-
 entity control_sync is
 	port (
 		CLOCK    : in  std_logic;
