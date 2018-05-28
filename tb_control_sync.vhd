@@ -15,23 +15,23 @@ architecture test of tb_control_sync is
 			RESET    : in  std_logic;
 			OP       : in  std_logic_vector(5 downto 0);  -- opcode
 			func     : in  std_logic_vector(5 downto 0);  -- func code
-			RegDst   : inout std_logic;  -- Register destination
-			Jump     : inout std_logic;
-			JumpR    : inout std_logic;  -- Jump register
-			beq      : inout std_logic;  -- Branch if equals
-			MemToReg : inout std_logic;  -- Memory to register
-			ALUop    : inout std_logic_vector(3 downto 0);  -- ALU op code
-			MemWrite : inout std_logic;  -- Memory write
-			ALUsrc1  : inout std_logic;
-			ALUsrc2  : inout std_logic;
-			RegWrite : inout std_logic;  -- Register write
-			bne      : inout std_logic;  -- Branch if not equals
-			LoadBU   : inout std_logic;  -- Load byte unsigned
-			LoadB    : inout std_logic;  -- Load byte
-			storeB   : inout std_logic;
-			JumpAL   : inout std_logic;	-- Jump and link
-			PC_EN    : inout std_logic;
-			current_state : inout std_logic_vector(2 downto 0)
+			RegDst   : out std_logic;  -- Register destination
+			Jump     : out std_logic;
+			JumpR    : out std_logic;  -- Jump register
+			beq      : out std_logic;  -- Branch if equals
+			MemToReg : out std_logic;  -- Memory to register
+			ALUop    : out std_logic_vector(3 downto 0);  -- ALU op code
+			MemWrite : out std_logic;  -- Memory write
+			ALUsrc1  : out std_logic;
+			ALUsrc2  : out std_logic;
+			RegWrite : out std_logic;  -- Register write
+			bne      : out std_logic;  -- Branch if not equals
+			LoadBU   : out std_logic;  -- Load byte unsigned
+			LoadB    : out std_logic;  -- Load byte
+			storeB   : out std_logic;
+			JumpAL   : out std_logic;	-- Jump and link
+			PC_EN    : out std_logic;
+			current_state : out std_logic_vector(2 downto 0)
 		);	
 	end component;
 	
