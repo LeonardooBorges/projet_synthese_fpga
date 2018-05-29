@@ -53,6 +53,7 @@ print(Labels)
 
 
 addr = 0
+machinecode = ''
 
 for line in code:
     binary = ''
@@ -102,3 +103,6 @@ for line in code:
             else:
                 binary += '{0:026b}'.format(int(tmp1[0]))
         print(binary)
+        machinecode += '(\"' + binary + '\"),'
+
+print(machinecode)

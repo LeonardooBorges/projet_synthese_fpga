@@ -97,7 +97,7 @@ RegFile_WriteData <= PCplus4 when Jmpal='1' else
 	Mem_ReadData when MemtoReg='1' else
 	ALU_Y;
 							
-ALU_A <= (31 downto 5 => InstMem_Instruction31_0(10)) & InstMem_Instruction31_0(10 downto 6) when AluSrc1='1' else
+ALU_A <= (31 downto 5 => '0') & InstMem_Instruction31_0(10 downto 6) when AluSrc1='1' else
 	RegFile_ReadData1;
 ALU_B <= (31 downto 16 => InstMem_Instruction31_0(15)) & InstMem_Instruction31_0(15 downto 0) when AluSrc2='1' else
 	RegFile_ReadData2;
